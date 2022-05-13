@@ -2234,40 +2234,6 @@
 							"type": "String"
 						}
 					]
-				},
-				{
-					"_type": "UMLClass",
-					"_id": "AAAAAAGAs2BMsjy6nYY=",
-					"_parent": {
-						"$ref": "AAAAAAGAcXfJqDvqlxo="
-					},
-					"name": "Reading",
-					"attributes": [
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAGAs2CmSkDDZo8=",
-							"_parent": {
-								"$ref": "AAAAAAGAs2BMsjy6nYY="
-							},
-							"name": "10.05.2022"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAGAs2DG6EHPy2k=",
-							"_parent": {
-								"$ref": "AAAAAAGAs2BMsjy6nYY="
-							},
-							"name": "x"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAGAs2D2aEM1OHg=",
-							"_parent": {
-								"$ref": "AAAAAAGAs2BMsjy6nYY="
-							},
-							"name": "20150"
-						}
-					]
 				}
 			]
 		}
