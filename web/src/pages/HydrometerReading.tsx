@@ -1,34 +1,61 @@
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Box, Container, FormControl, FormLabel, Input, Stack, Text, useToast, VStack } from "@chakra-ui/react";
 
 import { ConsumerDisplay } from "../components/ConsumerDisplay";
 import { Header } from "../components/Header";
 import { Button } from "../components/shared/Button";
 import { api } from "../services/api";
+import { formatDateTime } from "../utils/format";
+
+interface Hydrometer {
+    id: number;
+    number: string;
+    display: string;
+    updatedAt: string;
+}
 
 export function HydrometerReading() {
+    const [hydrometer, setHydrometer] = useState<Hydrometer | undefined>()
+    const [reading, setReading] = useState('')
+    const [readingIsAlreadyDone, setReadingIsAlreadyDone] = useState(false)
+
     const toast = useToast()
     const [isSubmiting, setIsSubmiting] = useState(false)
 
-    async function handleSubmit() {
+    async function handleSubmit(event: FormEvent) {
+        event.preventDefault()
         setIsSubmiting(true)
 
-        await api.post('/readings', {
-            data: 'tete'
-        })
-
-        await new Promise(resolve => setTimeout(resolve, 2000))
-
-        toast({
-        title: `Dados salvo com sucesso`,
-        status: 'success',
-        position: 'top-right',
-        variant: 'left-accent',
-        isClosable: true,
+        const { data } = await api.post(`/hydrometers/${hydrometer?.id}/readings`, {
+            reading
         })
 
         setIsSubmiting(false)
+        setReadingIsAlreadyDone(true)
      }
+
+    useEffect(() => {
+        async function fetch() {
+            const {data} = await api.get<Hydrometer>(`hydrometers/${1}`)
+            setHydrometer({
+                ...data,
+                updatedAt: formatDateTime(new Date(data.updatedAt))
+            })
+        }
+        fetch()  
+    }, [])
+
+    function showToast() {
+        return(
+            toast({
+                title: `Dados salvo com sucesso`,
+                status: 'success',
+                position: 'top-right',
+                variant: 'left-accent',
+                isClosable: true,
+            })
+        )
+    }
 
     return(
         <Stack>
@@ -43,31 +70,49 @@ export function HydrometerReading() {
 
                     <Stack spacing={1}>
                         <Text>Número do hidrômetro</Text>
-                        <Text fontWeight={'medium'}>152486522554</Text>
+                        <Text fontWeight={'medium'}>{hydrometer?.number}</Text>
                     </Stack>
 
                     <Stack spacing={1}>
-                        <Text>LEITURA ANTERIOR</Text>
-                        <Text fontWeight={'medium'}>27/04/2022 18:00</Text>
+                        <Text>ÚLTIMA LEITURA</Text>
+                        <Text fontWeight={'medium'}>{hydrometer?.updatedAt}</Text>
                     </Stack>
 
-                    <ConsumerDisplay consumer={3446455} />
+                    { hydrometer ? (
+                        <ConsumerDisplay consumer={ hydrometer.display } />
+                    ) : (
+                        'carregando...'
+                    )}
 
-                    <Stack spacing={2}>
-                        <Text>LEITURA ATUAL</Text>
-                        <FormControl>
-                        <FormLabel htmlFor='email'>Consumo</FormLabel>
-                        <Input fontSize={'28px'} name="consume" type={'number'} borderColor={'stroke'} h='16' textAlign={'right'} />
-                        {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
-                        </FormControl>
-                    </Stack>
+                    </Stack> 
 
-                    </Stack>
+                    { !readingIsAlreadyDone && (
+                        <Box as={'form'} mt={6} onSubmit={handleSubmit} >
+                            <Stack spacing={2}>
+                                <Text>NOVA LEITURA</Text>
+                                <FormControl>
+                                    <FormLabel htmlFor='email'>Consumo</FormLabel>
+                                    <Input
+                                        maxLength={7}
+                                        fontSize={'28px'} 
+                                        name="consume" 
+                                        type={'number'} 
+                                        borderColor={'stroke'} 
+                                        h='16' 
+                                        textAlign={'right'}
+                                        value={reading}
+                                        onChange={(event) => setReading(event.currentTarget.value)}
+                                    />
+                                    {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+                                </FormControl>
+                            </Stack>
 
-                    <Button onSubmit={handleSubmit} isLoading={isSubmiting}>
-                        SALVAR LEITURA
-                    </Button>
-
+                            <Button type='submit' isLoading={isSubmiting} disabled={reading.length === 0}>
+                                SALVAR LEITURA
+                            </Button>
+                        </Box>
+                    )}
+                    
                 </Box>
 
                 </Container>

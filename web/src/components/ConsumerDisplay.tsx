@@ -1,7 +1,7 @@
 import { HStack, PinInput, PinInputField , Stack, Text } from "@chakra-ui/react";
 
 interface ConsumerDisplayProps {
-    consumer: number;
+    consumer: string;
 }
 
 export function ConsumerDisplay({ consumer }: ConsumerDisplayProps) {
@@ -9,7 +9,7 @@ export function ConsumerDisplay({ consumer }: ConsumerDisplayProps) {
         <Stack>
             {/* <Text>Consumo</Text> */}
             <HStack spacing='3'>
-            <PinInput defaultValue={String(consumer)}>
+            <PinInput defaultValue={consumer}>
                 <PinInputField readOnly h='80px' w='70px' bg='background' borderWidth={'1px'} borderColor='stroke' fontSize={'36px'} fontWeight='semibold' />
                 <PinInputField readOnly h='80px' w='70px' bg='background' borderWidth={'1px'} borderColor='stroke' fontSize={'36px'} fontWeight='semibold' />
                 <PinInputField readOnly h='80px' w='70px' bg='background' borderWidth={'1px'} borderColor='stroke' fontSize={'36px'} fontWeight='semibold' />
