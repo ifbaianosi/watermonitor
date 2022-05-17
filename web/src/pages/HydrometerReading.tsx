@@ -36,14 +36,17 @@ export function HydrometerReading() {
 
     useEffect(() => {
         async function fetch() {
-            const {data} = await api.get<Hydrometer>(`hydrometers/${1}`)
+            const {data} = await api.get(`hydrometers/${1}`)
+
             setHydrometer({
-                ...data,
-                updatedAt: formatDateTime(new Date(data.updatedAt))
+                id: Number(data.hydrometer.id),
+                number: data.hydrometer.number,
+                display: String(data.hydrometer.display).length === 7 ? String(data.hydrometer.display) : String(`0${data.hydrometer.display}`),
+                updatedAt: formatDateTime(new Date(data.hydrometer.updated_at))
             })
         }
         fetch()  
-    }, [])
+    }, [readingIsAlreadyDone])
 
     function showToast() {
         return(
@@ -89,9 +92,12 @@ export function HydrometerReading() {
                     { !readingIsAlreadyDone && (
                         <Box as={'form'} mt={6} onSubmit={handleSubmit} >
                             <Stack spacing={2}>
-                                <Text>NOVA LEITURA</Text>
+                                <Box>
+                                    <Text>NOVA LEITURA</Text>
+                                    {/* <Text fontWeight={'medium'}>{formatDateTime(Date.now())}</Text> */}
+                                </Box>
                                 <FormControl>
-                                    <FormLabel htmlFor='email'>Consumo</FormLabel>
+                                    {/* <FormLabel htmlFor='email'>Consumo</FormLabel> */}
                                     <Input
                                         maxLength={7}
                                         fontSize={'28px'} 
