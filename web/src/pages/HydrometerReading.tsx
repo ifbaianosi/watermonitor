@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Box, Container, FormControl, FormLabel, Input, Stack, Text, useToast, VStack } from "@chakra-ui/react";
+import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 
 import { ConsumerDisplay } from "../components/ConsumerDisplay";
 import { Header } from "../components/Header";
@@ -65,65 +66,85 @@ export function HydrometerReading() {
             <Header title="LEITURA DIÁRIA DO HIDRÔMETRO" />
 
             <VStack as="main">
-                <Container maxW="1120px">
-                
-                <Box marginTop='16' w={'544px'} mx='auto' bg={'white'} p={'8'} rounded='lg' boxShadow='md' borderWidth={'1px'} borderColor={'stroke'}>
-                    
-                    <Stack spacing={6}>
+                <Container maxW="1120px">                
+                    <Box marginTop='16' w={'544px'} mx='auto' bg={'white'} p={'8'} rounded='lg' boxShadow='md' borderWidth={'1px'} borderColor={'stroke'}>                    
+                        <Stack spacing={6}>
+                            <Stack spacing={1}>
 
-                    <Stack spacing={1}>
-                        <Text>Número do hidrômetro</Text>
-                        <Text fontWeight={'medium'}>{hydrometer?.number}</Text>
-                    </Stack>
+                                <Skeleton w={'200px'} isLoaded={!!hydrometer} >
+                                    <Text >Número do hidrômetro</Text>   
+                                    <Text fontWeight={'medium'}>{hydrometer?.number}</Text>
+                                </Skeleton>
 
-                    <Stack spacing={1}>
-                        <Text>ÚLTIMA LEITURA</Text>
-                        <Text fontWeight={'medium'}>{hydrometer?.updatedAt}</Text>
-                    </Stack>
-
-                    { hydrometer ? (
-                        <ConsumerDisplay consumer={ hydrometer.display } />
-                    ) : (
-                        'carregando...'
-                    )}
-
-                    </Stack> 
-
-                    { !readingIsAlreadyDone && (
-                        <Box as={'form'} mt={6} onSubmit={handleSubmit} >
-                            <Stack spacing={2}>
-                                <Box>
-                                    <Text>NOVA LEITURA</Text>
-                                    {/* <Text fontWeight={'medium'}>{formatDateTime(Date.now())}</Text> */}
-                                </Box>
-                                <FormControl>
-                                    {/* <FormLabel htmlFor='email'>Consumo</FormLabel> */}
-                                    <Input
-                                        maxLength={7}
-                                        fontSize={'28px'} 
-                                        name="consume" 
-                                        type={'number'} 
-                                        borderColor={'stroke'} 
-                                        h='16' 
-                                        textAlign={'right'}
-                                        value={reading}
-                                        onChange={(event) => setReading(event.currentTarget.value)}
-                                    />
-                                    {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
-                                </FormControl>
+                                {/* <SkeletonText mt='1' w={'200px'} isLoaded={!!hydrometer} noOfLines={1}>
+                                    <Text w={'100%'}>Número do hidrômetro</Text>   
+                                </SkeletonText>
+                                <SkeletonText mt='1' w={'100px'} isLoaded={!!hydrometer} noOfLines={1}>
+                                    <Text fontWeight={'medium'}>{hydrometer?.number}</Text>
+                                </SkeletonText> */}
                             </Stack>
 
-                            <Button type='submit' isLoading={isSubmiting} disabled={reading.length === 0}>
-                                SALVAR LEITURA
-                            </Button>
-                        </Box>
-                    )}
-                    
-                </Box>
+                            <Stack spacing={1}>
 
+                                <Skeleton w={'200px'} isLoaded={!!hydrometer} >
+                                    <Text w={'100%'}>ÚLTIMA LEITURA</Text>
+                                    <Text w={'100%'} fontWeight={'medium'}>{hydrometer?.updatedAt}</Text>
+                                </Skeleton>
+
+                                {/* <SkeletonText mt='1' w={'200px'} isLoaded={!!hydrometer} noOfLines={1}>
+                                    <Text w={'100%'}>ÚLTIMA LEITURA</Text>
+                                </SkeletonText>
+                                <SkeletonText mt='1' w={'150px'} isLoaded={!!hydrometer} noOfLines={1}>
+                                    <Text w={'100%'} fontWeight={'medium'}>{hydrometer?.updatedAt}</Text>
+                                </SkeletonText> */}
+                            </Stack>
+
+                            <Skeleton isLoaded={!!hydrometer}>
+                                <ConsumerDisplay reading={ hydrometer?.display || '0' } />
+                            </Skeleton>
+                        </Stack> 
+
+                        { !readingIsAlreadyDone && ( 
+                            <Box as={'form'} mt={6} onSubmit={handleSubmit} >
+                                <Stack spacing={2}>
+                                    <Skeleton w={'200px'} isLoaded={!!hydrometer}>
+                                        {/* <Box> */}
+                                            <Text>NOVA LEITURA</Text>
+                                            {/* <Text fontWeight={'medium'}>{formatDateTime(Date.now())}</Text> */}
+                                        {/* </Box> */}
+                                    </Skeleton>
+
+                                    <Skeleton isLoaded={!!hydrometer}>
+                                        <FormControl>
+                                            <ConsumerDisplay onChangeReading={setReading} readOnly={false} reading={ reading || hydrometer?.display || '0' } />
+                                            {/* <FormLabel htmlFor='email'>Consumo</FormLabel> */}
+                                            {/* <Input
+                                                maxLength={7}
+                                                fontSize={'28px'} 
+                                                name="consume" 
+                                                type={'number'} 
+                                                borderColor={'stroke'} 
+                                                h='16' 
+                                                textAlign={'right'}
+                                                value={reading}
+                                                onChange={(event) => setReading(event.currentTarget.value)}
+                                            /> */}
+                                            {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
+                                        </FormControl>
+                                    </Skeleton>
+                                </Stack>
+
+                                { !!hydrometer && (
+                                    <Button type='submit' isLoading={isSubmiting}>
+                                        SALVAR LEITURA
+                                    </Button>
+                                )}
+
+                            </Box>                            
+                        )}                    
+                    </Box>
                 </Container>
             </VStack>
-
-            </Stack>
+        </Stack>
     );
 }
