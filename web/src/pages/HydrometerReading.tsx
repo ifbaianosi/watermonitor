@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Box, Container, FormControl, FormLabel, Input, Stack, Text, useToast, VStack } from "@chakra-ui/react";
-import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
+import { Box, Container, FormControl, Stack, Text, useToast, VStack } from "@chakra-ui/react";
+import { Skeleton } from '@chakra-ui/react'
 
 import { ConsumerDisplay } from "../components/ConsumerDisplay";
 import { Header } from "../components/Header";
@@ -31,6 +31,8 @@ export function HydrometerReading() {
             reading
         })
 
+        showToast()
+
         setIsSubmiting(false)
         setReadingIsAlreadyDone(true)
      }
@@ -52,9 +54,10 @@ export function HydrometerReading() {
     function showToast() {
         return(
             toast({
-                title: `Dados salvo com sucesso`,
+                title: `Leitura cadastrada`,
+                description: 'Dados da leitura salvo com sucesso.',
                 status: 'success',
-                position: 'top-right',
+                position: 'top',
                 variant: 'left-accent',
                 isClosable: true,
             })
@@ -63,40 +66,24 @@ export function HydrometerReading() {
 
     return(
         <Stack>
-            <Header title="LEITURA DIÁRIA DO HIDRÔMETRO" />
+            <Header navigateTo="/" title="LEITURA DIÁRIA DO HIDRÔMETRO" />
 
             <VStack as="main">
                 <Container maxW="1120px">                
                     <Box marginTop='16' w={'544px'} mx='auto' bg={'white'} p={'8'} rounded='lg' boxShadow='md' borderWidth={'1px'} borderColor={'stroke'}>                    
                         <Stack spacing={6}>
                             <Stack spacing={1}>
-
                                 <Skeleton w={'200px'} isLoaded={!!hydrometer} >
                                     <Text >Número do hidrômetro</Text>   
                                     <Text fontWeight={'medium'}>{hydrometer?.number}</Text>
                                 </Skeleton>
-
-                                {/* <SkeletonText mt='1' w={'200px'} isLoaded={!!hydrometer} noOfLines={1}>
-                                    <Text w={'100%'}>Número do hidrômetro</Text>   
-                                </SkeletonText>
-                                <SkeletonText mt='1' w={'100px'} isLoaded={!!hydrometer} noOfLines={1}>
-                                    <Text fontWeight={'medium'}>{hydrometer?.number}</Text>
-                                </SkeletonText> */}
                             </Stack>
 
                             <Stack spacing={1}>
-
                                 <Skeleton w={'200px'} isLoaded={!!hydrometer} >
                                     <Text w={'100%'}>ÚLTIMA LEITURA</Text>
                                     <Text w={'100%'} fontWeight={'medium'}>{hydrometer?.updatedAt}</Text>
                                 </Skeleton>
-
-                                {/* <SkeletonText mt='1' w={'200px'} isLoaded={!!hydrometer} noOfLines={1}>
-                                    <Text w={'100%'}>ÚLTIMA LEITURA</Text>
-                                </SkeletonText>
-                                <SkeletonText mt='1' w={'150px'} isLoaded={!!hydrometer} noOfLines={1}>
-                                    <Text w={'100%'} fontWeight={'medium'}>{hydrometer?.updatedAt}</Text>
-                                </SkeletonText> */}
                             </Stack>
 
                             <Skeleton isLoaded={!!hydrometer}>
@@ -139,7 +126,6 @@ export function HydrometerReading() {
                                         SALVAR LEITURA
                                     </Button>
                                 )}
-
                             </Box>                            
                         )}                    
                     </Box>
