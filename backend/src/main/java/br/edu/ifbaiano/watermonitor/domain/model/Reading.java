@@ -5,13 +5,19 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+
 @Entity
+@Table
 public class Reading {
 
 	@Id
@@ -24,7 +30,22 @@ public class Reading {
 	
 	private Integer consume;
 	private Integer reading;
-	private Long hydrometerId;
+	
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Hydrometer hydrometer;
+	
+	public Boolean readingValueGreaterThan(Integer reading, Integer lastReading) {
+		if(reading>=lastReading) {
+			return true;			
+		}else {
+			return false;
+		}
+	}
+	
+	public Integer consume(Integer reading, Integer display) {
+		return reading-display;
+	}
 
 	public Long getId() {
 		return id;
@@ -58,13 +79,14 @@ public class Reading {
 		this.reading = reading;
 	}
 
-	public Long getHydrometerId() {
-		return hydrometerId;
+	public Hydrometer getHydrometer() {
+		return hydrometer;
 	}
 
-	public void setHydrometerId(Long hydrometerId) {
-		this.hydrometerId = hydrometerId;
+	public void setHydrometer(Hydrometer hydrometer) {
+		this.hydrometer = hydrometer;
 	}
+
 
 	@Override
 	public int hashCode() {

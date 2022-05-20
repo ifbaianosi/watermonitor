@@ -1,7 +1,6 @@
 package br.edu.ifbaiano.watermonitor.domain.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,35 +8,61 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
+@Table
 public class Hydrometer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	@Column(nullable = false)
 	private String number;
 	
-	@OneToMany(mappedBy = "reading")
-	private List<Reading> readings = new ArrayList<>(); 
+	@UpdateTimestamp
+	@Column(nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime updatedAt;
 	
-	public long getId() {
+	@Column(nullable = false)
+	private Integer display;
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNumber() {
 		return number;
 	}
+
 	public void setNumber(String number) {
 		this.number = number;
 	}
+
+	public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(OffsetDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Integer getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(Integer display) {
+		this.display = display;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -23,11 +23,10 @@ public class TankLevel {
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime createdAt;
 
-	@NotBlank
 	private WaterLevel waterLevel;
 	
-	private Long tankId;
-	
+	@ManyToOne
+	private Tank tank;
 	
 	public Long getId() {
 		return id;
@@ -41,18 +40,20 @@ public class TankLevel {
 	public void setCreatedAt(OffsetDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Long getTankId() {
-		return tankId;
-	}
-	public void setTankId(Long tankId) {
-		this.tankId = tankId;
-	}
+
 	public WaterLevel getWaterLevel() {
 		return waterLevel;
 	}
 	public void setWaterLevel(WaterLevel waterLevel) {
 		this.waterLevel = waterLevel;
 	}
+	public Tank getTank() {
+		return tank;
+	}
+	public void setTank(Tank tank) {
+		this.tank = tank;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
