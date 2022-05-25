@@ -9,7 +9,7 @@ import { createServer, Model, belongsTo, hasMany } from 'miragejs'
 
 // type Reading = {
 //     id: number;
-//     created_at: string;
+//     createdAt: string;
 //     consume: number;
 //     reading: number;
 //     hydrometer: Hydrometer
@@ -40,17 +40,17 @@ export function makeServer() {
                 const hydrometer = schema.db.hydrometers.find(id)
                 const consume = (attrs.reading - hydrometer.display)
 
-                const updated_at = timestamp
+                const updatedAt = timestamp
 
                 const newReadingData = {
-                    created_at: timestamp,
+                    createdAt: timestamp,
                     reading: attrs.reading,
                     consume,
                     hydrometer_id: id,
                 }
 
                 schema.db.hydrometers.update(id, {
-                    updated_at: timestamp,
+                    updatedAt: timestamp,
                     display: Number(attrs.reading)
                 })
 
@@ -70,7 +70,7 @@ export function makeServer() {
                   id: 1,
                   number: '083245444',
                   display: 686143,
-                  updated_at: '2022-05-16T15:00:00'
+                  updatedAt: '2022-05-16T15:00:00'
                 }
               ],
       
