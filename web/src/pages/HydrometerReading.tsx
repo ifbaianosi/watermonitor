@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Button as ChakraButton, Box, Container, FormControl, Stack, Text, useDisclosure, useToast, VStack, HStack, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Flex, Alert, AlertIcon, Icon } from "@chakra-ui/react";
+import { Button as ChakraButton, Box, Container, FormControl, Stack, Text, useDisclosure, useToast, VStack, HStack, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Flex, Alert, AlertIcon, Icon, FormErrorMessage } from "@chakra-ui/react";
 import { Skeleton } from '@chakra-ui/react'
 
 import { FiChevronRight } from "react-icons/fi";
@@ -32,6 +32,8 @@ export function HydrometerReading() {
     const [reading, setReading] = useState('')
     const [readingIsAlreadyDone, setReadingIsAlreadyDone] = useState(false)
 
+    const [readingFormIsInvalid, setReadingFormIsInvalid] = useState(false)
+
     const toast = useToast()
     const { isOpen, onOpen, onClose } = useDisclosure() 
 
@@ -54,7 +56,14 @@ export function HydrometerReading() {
 
     function handleOpenModalReadingDataConfirmation(event: FormEvent) {
         event.preventDefault()
-        onOpen()
+        setReadingFormIsInvalid(false)
+
+        if (Number(reading) <= Number(hydrometer?.display)) {
+            setReadingFormIsInvalid(true)
+        } else {
+            onOpen()
+        }
+
     }
 
     useEffect(() => {
@@ -62,10 +71,10 @@ export function HydrometerReading() {
             const {data} = await api.get(`hydrometers/${1}`)
 
             setHydrometer({
-                id: Number(data.id),
-                number: data.number,
-                display: String(data.display).length === 7 ? String(data.display) : String(`0${data.display}`),
-                updatedAt: formatDateTime(new Date(data.updatedAt))
+                id: Number(data.hydrometer.id),
+                number: data.hydrometer.number,
+                display: String(data.hydrometer.display).length === 7 ? String(data.hydrometer.display) : String(`0${data.hydrometer.display}`),
+                updatedAt: formatDateTime(new Date(data.hydrometer.updatedAt))
             })
         }
 
@@ -91,7 +100,7 @@ export function HydrometerReading() {
         <Stack>
             <Header navigateTo="/" title="LEITURA DO HIDRÔMETRO" />
 
-            <VStack as="main">
+            <VStack as="main"  _dark={{bg: 'gray.900'}}>
                 <Container maxW="1120px">                
                     <Box marginTop='16' w={'544px'} mx='auto' bg={'white'} p={'8'} rounded='lg' boxShadow='md' borderWidth={'1px'} borderColor={'stroke'}>                    
                         <Stack spacing={6}>
@@ -104,7 +113,7 @@ export function HydrometerReading() {
 
                             <Stack spacing={1}>
                                 <Skeleton w={'200px'} isLoaded={!!hydrometer} >
-                                    <Text w={'100%'}>ÚLTIMA LEITURA</Text>
+                                    <Text w={'100%'}>Última leitura</Text>
                                     <Text w={'100%'} fontWeight={'medium'}>{hydrometer?.updatedAt}</Text>
                                 </Skeleton>
                             </Stack>
@@ -118,12 +127,19 @@ export function HydrometerReading() {
                             <Box as={'form'} mt={6} onSubmit={handleOpenModalReadingDataConfirmation} >
                                 <Stack spacing={2}>
                                     <Skeleton w={'200px'} isLoaded={!!hydrometer}>
-                                        <Text>NOVA LEITURA</Text>
+                                        <Text>Nova leitura</Text>
                                     </Skeleton>
 
                                     <Skeleton isLoaded={!!hydrometer}>
-                                        <FormControl>
+                                        <FormControl isInvalid={readingFormIsInvalid}>
                                             <ConsumerDisplay onChangeReading={setReading} readOnly={false} reading={ reading || hydrometer?.display || '0' } />
+
+                                            { readingFormIsInvalid && (
+                                                <Alert status='warning' mt={'4'}>
+                                                    <AlertIcon />
+                                                    A nova leitura deve ser maior que a leitura anterior.
+                                                </Alert>
+                                            )}
                                             {/* <FormLabel htmlFor='email'>Consumo</FormLabel> */}
                                             {/* <Input
                                                 maxLength={7}
@@ -142,9 +158,9 @@ export function HydrometerReading() {
                                 </Stack>
 
                                 { !!hydrometer && (
-                                    <Button type="submit">
+                                    <Button type="submit" mt={'8'}>
                                         Registrar leitura
-                                        <Icon as={FiChevronRight} fontSize="24" ml={'3'} />
+                                        <Icon as={FiChevronRight} fontSize="24" ml={'6'} />
                                     </Button>
                                 )}
                             </Box>                            
@@ -185,10 +201,10 @@ export function HydrometerReading() {
             </ModalBody>
 
             <ModalFooter justifyContent={'flex-start'}>
-                <ChakraButton colorScheme={'blue'} mr={3} isLoading={isSubmiting} onClick={handleSubmit}>
+                <Button bg={'brand.blue'} textColor={'white'} fontSize="15px" _hover={{opacity: '0.8'}} mr={3} isLoading={isSubmiting} onClick={handleSubmit}>
                     Confirmar leitura
-                </ChakraButton>
-                <ChakraButton variant='ghost' onClick={onClose}>
+                </Button>
+                <ChakraButton variant='ghost' h={'12'} onClick={onClose}>
                     Revisar leitura
                 </ChakraButton>
             </ModalFooter>

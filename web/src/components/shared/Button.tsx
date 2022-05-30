@@ -8,7 +8,7 @@ interface ButtonProps extends ChakraButtonProps {
 
 export function Button( { /* onSubmit ,*/ children, ...rest }: ButtonProps) {
     return(
-        <ChakraButton /*  onClick={onSubmit} */ {...rest} loadingText='Aguarde' mt={'8'} h={'12'} bg={'brand.blue'} textColor={'white'} fontSize="15px" _hover={{opacity: '0.8'}}>
+        <ChakraButton /*  onClick={onSubmit} */ {...rest} loadingText='Aguarde...' h={'12'} bg={'brand.blue'} textColor={'white'} fontSize="15px" _hover={{opacity: '0.8'}}>
             
             { children }
         </ChakraButton>
