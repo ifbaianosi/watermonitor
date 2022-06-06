@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Button as ChakraButton, Box, Container, FormControl, Stack, Text, useDisclosure, useToast, VStack, HStack, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Flex, Alert, AlertIcon, Icon, FormErrorMessage } from "@chakra-ui/react";
+import { Box, Container, FormControl, Stack, Text, useDisclosure, useToast, VStack, HStack, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Flex, Alert, AlertIcon, Icon, FormErrorMessage } from "@chakra-ui/react";
 import { Skeleton } from '@chakra-ui/react'
 
 import { FiChevronRight } from "react-icons/fi";
@@ -9,16 +9,7 @@ import { Header } from "../components/Header";
 import { Button } from "../components/shared/Button";
 import { api } from "../services/api";
 import { formatDateTime } from "../utils/format";
-
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-  } from '@chakra-ui/react'
+import { ModalReadConfirmation } from "../components/ModalReadConfirmation";
 
 interface Hydrometer {
     id: number;
@@ -82,16 +73,14 @@ export function HydrometerReading() {
     }, [readingIsAlreadyDone])
 
     function showToast() {
-        return(
-            toast({
-                title: `Sucesso`,
-                description: 'Dados da leitura salvo com sucesso.',
-                status: 'success',
-                position: 'top-right',
-                variant: 'left-accent',
-                isClosable: true,
-            })
-        )
+        toast({
+            title: `Sucesso`,
+            description: 'Dados da leitura salvo com sucesso.',
+            status: 'success',
+            position: 'top-right',
+            variant: 'left-accent',
+            isClosable: true,
+        })
     }
 
     return(
@@ -100,7 +89,7 @@ export function HydrometerReading() {
         <Stack>
             <Header navigateTo="/" title="LEITURA DO HIDRÔMETRO" />
 
-            <VStack as="main"  _dark={{bg: 'gray.900'}}>
+            <VStack as="main" >
                 <Container maxW="1120px">                
                     <Box marginTop='16' w={'544px'} mx='auto' bg={'white'} p={'8'} rounded='lg' boxShadow='md' borderWidth={'1px'} borderColor={'stroke'}>                    
                         <Stack spacing={6}>
@@ -170,46 +159,19 @@ export function HydrometerReading() {
             </VStack>
         </Stack>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-            <ModalHeader>Confirmação</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-            <Alert status='warning' mb={'4'}>
-                <AlertIcon />
-                Confirme os dados da leitura.
-            </Alert>
-            <TableContainer mb={'4'}>
-                <Table variant='simple'>
-                    <Tbody>
-                        <Tr>
-                            <Td>Leitura anterior</Td>
-                            <Td fontSize={'xl'} fontWeight={'medium'}>{ hydrometer?.display }</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Leitura de hoje</Td>
-                            <Td fontSize={'xl'} fontWeight={'medium'}>{ reading }</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Consumo</Td>
-                            <Td fontSize={'xl'} fontWeight={'medium'}>{ `${(Number(reading) - Number(hydrometer?.display))} (m³)` }</Td>
-                        </Tr>
-                    </Tbody>
-                </Table>
-            </TableContainer>
-            </ModalBody>
-
-            <ModalFooter justifyContent={'flex-start'}>
-                <Button bg={'brand.blue'} textColor={'white'} fontSize="15px" _hover={{opacity: '0.8'}} mr={3} isLoading={isSubmiting} onClick={handleSubmit}>
-                    Confirmar leitura
-                </Button>
-                <ChakraButton variant='ghost' h={'12'} onClick={onClose}>
-                    Revisar leitura
-                </ChakraButton>
-            </ModalFooter>
-        </ModalContent>
-      </Modal>
-        </>
+        <ModalReadConfirmation 
+            isOpen={isOpen} 
+            onClose={onClose} 
+            isSubmiting={isSubmiting} 
+            onSubmit={handleSubmit} 
+            dataConfirmation={
+                {
+                    display: hydrometer?.display || '',
+                    reading: reading,
+                    consumo: `${(Number(reading) - Number(hydrometer?.display))} (m³)`,
+                }
+            }
+        />
+    </>
     );
 }

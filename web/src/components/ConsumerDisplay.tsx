@@ -1,4 +1,4 @@
-import { ButtonGroup, color, FormControl, FormErrorMessage, HStack, PinInput, PinInputField , Stack, Text } from "@chakra-ui/react";
+import { HStack, PinInput, PinInputField , Stack } from "@chakra-ui/react";
 
 interface ConsumerDisplayProps {
     reading: string;
