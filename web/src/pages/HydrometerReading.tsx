@@ -27,7 +27,6 @@ export function HydrometerReading() {
 
     const toast = useToast()
     const { isOpen, onOpen, onClose } = useDisclosure() 
-
     const [isSubmiting, setIsSubmiting] = useState(false)
 
     async function handleSubmit(event: FormEvent) {
@@ -72,20 +71,8 @@ export function HydrometerReading() {
         fetch()  
     }, [readingIsAlreadyDone])
 
-    function showToast() {
-        toast({
-            title: `Sucesso`,
-            description: 'Dados da leitura salvo com sucesso.',
-            status: 'success',
-            position: 'top-right',
-            variant: 'left-accent',
-            isClosable: true,
-        })
-    }
-
     return(
-        <>
-        
+        <>        
         <Stack>
             <Header navigateTo="/" title="LEITURA DO HIDRÔMETRO" />
 
@@ -129,19 +116,6 @@ export function HydrometerReading() {
                                                     A nova leitura deve ser maior que a leitura anterior.
                                                 </Alert>
                                             )}
-                                            {/* <FormLabel htmlFor='email'>Consumo</FormLabel> */}
-                                            {/* <Input
-                                                maxLength={7}
-                                                fontSize={'28px'} 
-                                                name="consume" 
-                                                type={'number'} 
-                                                borderColor={'stroke'} 
-                                                h='16' 
-                                                textAlign={'right'}
-                                                value={reading}
-                                                onChange={(event) => setReading(event.currentTarget.value)}
-                                            /> */}
-                                            {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
                                         </FormControl>
                                     </Skeleton>
                                 </Stack>
@@ -173,5 +147,16 @@ export function HydrometerReading() {
             }
         />
     </>
-    );
+    );    
+
+    function showToast() {
+        toast({
+            title: `Sucesso`,
+            description: 'Dados da leitura salvo com sucesso.',
+            status: 'success',
+            position: 'top-right',
+            variant: 'left-accent',
+            isClosable: true,
+        })
+    }
 }
