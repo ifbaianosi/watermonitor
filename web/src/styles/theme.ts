@@ -12,6 +12,10 @@ const theme = extendTheme({
         redAlpha: 'RGBA(237, 28, 36, 0.05)',
         redAlpha200: 'RGBA(237, 28, 36, 0.20)'
     },
+    fonts: {
+      heading: `'Poppins', sans-serif`,
+      body: `'Open-Sans', sans-serif`,      
+    },
     styles: {
       global: {
         // styles for the `body`

@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
-import { Box, Flex, Icon, IconButton, Link as ChakraLink, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Icon, IconButton, Link as ChakraLink, Text } from "@chakra-ui/react";
 import { FiLogOut } from 'react-icons/fi'
 
 import { Header } from '../components/Header';
+import { TankCard } from '../components/TankCard';
 
 export function Home() {
     return(
+        <>
         <Header>
             <Flex justify={'space-between'} w={'100%'} align={'center'}>
                 <Flex justify={'center'} width={'100%'} gap={'10'}>
@@ -23,5 +25,9 @@ export function Home() {
                 </Flex>
             </Flex>
         </Header>
+        <Container maxWidth={'1120px'}>
+            <TankCard></TankCard>
+        </Container>
+        </>
     )
 }
