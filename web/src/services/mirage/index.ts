@@ -23,7 +23,8 @@ export function makeServer() {
             }),
             hydrometer: Model.extend({
                 readings: hasMany(),
-            })
+            }),
+            tank: Model
         },
 
         routes() {
@@ -58,6 +59,7 @@ export function makeServer() {
 
                 return schema.db.readings.insert(newReadingData)
             })
+            this.get('/tanks');
 
             this.namespace = ''
             this.passthrough()
@@ -75,6 +77,39 @@ export function makeServer() {
               ],
       
               readings: [
+              ],
+
+              tanks: [
+                  {
+                      id: 1,
+                      name: 'Tanque azul - Residência',
+                      description: ''
+                  },
+                  {
+                    id: 2,
+                    name: 'Portaria',
+                    description: ''
+                  },
+                  {
+                    id: 3,
+                    name: 'Aviário',
+                    description: ''
+                  },
+                  {
+                    id: 4,
+                    name: 'Sabotagem',
+                    description: ''
+                  },
+                  {
+                    id: 5,
+                    name: 'Tanque azul - Horta',
+                    description: ''
+                  },
+                  {
+                    id: 6,
+                    name: 'Tanque azul - Suíno',
+                    description: ''
+                  }
               ]
             })
         },

@@ -4,8 +4,28 @@ import { FiLogOut } from 'react-icons/fi'
 
 import { Header } from '../components/Header';
 import { TankCard } from '../components/TankCard';
+import { useEffect, useState } from 'react';
+import { api } from '../services/api';
+import { Tanks } from '../components/Tanks';
+
+export interface Tank {
+    id: number;
+    name: string;
+}
 
 export function Home() {
+
+    const [tanks, setTanks] = useState<Tank[]>([])
+
+    useEffect(() => {
+        async function loadData() {
+            const response = await api.get('/tanks')
+            setTanks(response.data.tanks)
+        }
+
+        loadData()
+    }, [])
+
     return(
         <>
         <Header>
@@ -25,8 +45,9 @@ export function Home() {
                 </Flex>
             </Flex>
         </Header>
-        <Container maxWidth={'1120px'}>
-            <TankCard></TankCard>
+        <Container maxWidth={'1120px'} p={'0'}>
+            <Tanks tanks={tanks} />
+            
         </Container>
         </>
     )
