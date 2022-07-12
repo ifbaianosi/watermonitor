@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,8 @@ public class TankLevel {
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime createdAt;
 
-	private WaterLevel waterLevel;
+	@Enumerated(EnumType.STRING)
+	private WaterLevel waterLevel = WaterLevel.EMPTY;
 	
 	@ManyToOne
 	private Tank tank;
@@ -69,7 +72,4 @@ public class TankLevel {
 		TankLevel other = (TankLevel) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
 }
