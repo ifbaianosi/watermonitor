@@ -9,7 +9,7 @@ import { createServer, Model, belongsTo, hasMany } from 'miragejs'
 
 // type Reading = {
 //     id: number;
-//     created_at: string;
+//     createdAt: string;
 //     consume: number;
 //     reading: number;
 //     hydrometer: Hydrometer
@@ -23,7 +23,8 @@ export function makeServer() {
             }),
             hydrometer: Model.extend({
                 readings: hasMany(),
-            })
+            }),
+            tank: Model
         },
 
         routes() {
@@ -40,17 +41,17 @@ export function makeServer() {
                 const hydrometer = schema.db.hydrometers.find(id)
                 const consume = (attrs.reading - hydrometer.display)
 
-                const updated_at = timestamp
+                const updatedAt = timestamp
 
                 const newReadingData = {
-                    created_at: timestamp,
+                    createdAt: timestamp,
                     reading: attrs.reading,
                     consume,
                     hydrometer_id: id,
                 }
 
                 schema.db.hydrometers.update(id, {
-                    updated_at: timestamp,
+                    updatedAt: timestamp,
                     display: Number(attrs.reading)
                 })
 
@@ -58,6 +59,7 @@ export function makeServer() {
 
                 return schema.db.readings.insert(newReadingData)
             })
+            this.get('/tanks');
 
             this.namespace = ''
             this.passthrough()
@@ -70,11 +72,44 @@ export function makeServer() {
                   id: 1,
                   number: '083245444',
                   display: 686143,
-                  updated_at: '2022-05-16T15:00:00'
+                  updatedAt: '2022-05-16T15:00:00'
                 }
               ],
       
               readings: [
+              ],
+
+              tanks: [
+                  {
+                      id: 1,
+                      name: 'Tanque azul - Residência',
+                      description: ''
+                  },
+                  {
+                    id: 2,
+                    name: 'Portaria',
+                    description: ''
+                  },
+                  {
+                    id: 3,
+                    name: 'Aviário',
+                    description: ''
+                  },
+                  {
+                    id: 4,
+                    name: 'Sabotagem',
+                    description: ''
+                  },
+                  {
+                    id: 5,
+                    name: 'Tanque azul - Horta',
+                    description: ''
+                  },
+                  {
+                    id: 6,
+                    name: 'Tanque azul - Suíno',
+                    description: ''
+                  }
               ]
             })
         },

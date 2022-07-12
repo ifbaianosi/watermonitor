@@ -1,15 +1,17 @@
 import { Box, Flex, Icon, IconButton, Text, Image } from "@chakra-ui/react";
+import { ReactNode } from "react";
 import { FiArrowLeft } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 
 import logoImg from '../../assets/logo.svg'
 
 interface HeaderProps {
-    title: string;
+    title?: string;
     navigateTo?: string;
+    children?: ReactNode;
 }
 
-export function Header({title, navigateTo}: HeaderProps) {
+export function Header({title, navigateTo, children}: HeaderProps) {
     const navigate = useNavigate()
 
     return(
@@ -17,9 +19,10 @@ export function Header({title, navigateTo}: HeaderProps) {
             <Flex px='6' width={'100%'} margin={'auto'} maxWidth={'1120px'} as="header" justify={'space-between'} align={'center'} py="6">
                 <Image w={'11'} src={logoImg} alt="Logo watermonitor" />
                     
-                <Text>{title}</Text>
+                {title && <Text>{title}</Text>}
+                {children && children}
 
-                <IconButton onClick={() => navigateTo && navigate(navigateTo)} aria-label="Voltar para a página anterior" bg={'white'} borderWidth={1} borderColor={'stroke'} icon={<Icon as={FiArrowLeft}  />} />
+                { navigateTo && <IconButton onClick={() => navigate(navigateTo)} aria-label="Voltar para a página anterior" bg={'white'} borderWidth={1} borderColor={'stroke'} icon={<Icon as={FiArrowLeft}  />} />} 
             </Flex>
         </Box>
     );
