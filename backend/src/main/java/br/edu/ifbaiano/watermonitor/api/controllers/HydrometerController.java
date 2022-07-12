@@ -1,7 +1,5 @@
 package br.edu.ifbaiano.watermonitor.api.controllers;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifbaiano.watermonitor.domain.model.Hydrometer;
 import br.edu.ifbaiano.watermonitor.domain.service.HydrometerService;
-import br.edu.ifbaiano.watermonitor.infrastructure.SuapClient;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -37,17 +34,4 @@ public class HydrometerController {
 		return hydrometerSevice.save(hydrometer);
 	}
 	
-	@GetMapping("/token")
-	public void token() {
-		SuapClient client = new SuapClient("CapHL5o9xFlKYu2T4Jqsr1RN90ikPUXCrGJXENo5", 
-				"6dclF1jJdEo2moVrxajZdHdBvTr4c1F4HDLbNT4Z7iJ8qogdjCwlMgl1JePzEZ4nDGMUh6rR0j9owtLbpYkYWmOqR3b6CFr6QQxQEKdodhYeqxJY14iuPiH54K9GHV4k");
-		
-		try {
-			client.authorize();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			
-	}
 }
