@@ -11,11 +11,11 @@ public class HydrometerService {
 
 	@Autowired
 	private HydrometerRepository hydrometerRepository;
-	
+
 	public Hydrometer findOrFail(Long hydrometerId) {
 		return hydrometerRepository.findById(hydrometerId).orElseThrow();
 	}
-	
+
 	public Hydrometer save(Hydrometer hydrometer) {
 		return hydrometerRepository.save(hydrometer);
 	}

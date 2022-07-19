@@ -12,23 +12,23 @@ import br.edu.ifbaiano.watermonitor.domain.repository.TankRepository;
 
 @Service
 public class TankLevelService {
-	
+
 	@Autowired
 	private TankLevelRepository tankLevelRepository;
-	
+
 	@Autowired
 	private TankRepository tankRepository;
-	
+
 	@Transactional
 	public TankLevel save(TankLevel tankLevel, Long tankId) {
-		Tank tank = tankRepository.findById(tankId).orElseThrow(); 
-		
+		Tank tank = tankRepository.findById(tankId).orElseThrow();
+
 		tankLevel.setTank(tank);
-		
+
 		return tankLevelRepository.save(tankLevel);
-		
+
 	}
-	
+
 	public TankLevel findOrFail(Long tankLevelId) {
 		return tankLevelRepository.findById(tankLevelId)
 				.orElseThrow();

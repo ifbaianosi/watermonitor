@@ -16,31 +16,31 @@ public class ReadingService {
 
 	@Autowired
 	private ReadingRepository readingRepository;
-	
+
 	@Autowired
 	private HydrometerRepository hydrometerRepository;
-	
+
 	@Autowired
 	private HydrometerService hydrometerService;
-	
+
 	@Transactional
 	public Reading save(Reading reading, Long hydrometerId) {
 		Hydrometer hydrometer = hydrometerRepository.findById(hydrometerId).orElseThrow();
-		
+
 		Boolean isBigger = reading.readingValueGreaterThan(reading.getReading(), hydrometer.getDisplay());
-		
+
 		if(isBigger) {
 			Integer consume = reading.consume(reading.getReading(), hydrometer.getDisplay());
-			
+
 			hydrometer.setDisplay(reading.getReading());
 			reading.setHydrometer(hydrometer);
 			reading.setConsume(consume);
 			hydrometerService.save(hydrometer);
-			
+
 		}else {
 			throw new DomainException("Valor menor que a última leitura, favor inserir um valor maior ou igual a "+hydrometer.getDisplay());
 		}
-				
+
 		return readingRepository.save(reading);
 	}
 }
