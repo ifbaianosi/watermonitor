@@ -20,17 +20,17 @@ public class TankLevel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@CreationTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime createdAt;
 
 	@Enumerated(EnumType.STRING)
 	private WaterLevel waterLevel = WaterLevel.EMPTY;
-	
+
 	@ManyToOne
 	private Tank tank;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -56,7 +56,7 @@ public class TankLevel {
 	public void setTank(Tank tank) {
 		this.tank = tank;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -65,9 +65,7 @@ public class TankLevel {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		TankLevel other = (TankLevel) obj;
 		return Objects.equals(id, other.id);

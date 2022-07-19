@@ -15,22 +15,22 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Table
 public class Hydrometer {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String number;
-	
+
 	@UpdateTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime updatedAt;
-	
+
 	@Column(nullable = false)
 	private Integer display;
-	
-	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -67,14 +67,12 @@ public class Hydrometer {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Hydrometer other = (Hydrometer) obj;
 		return id == other.id;
