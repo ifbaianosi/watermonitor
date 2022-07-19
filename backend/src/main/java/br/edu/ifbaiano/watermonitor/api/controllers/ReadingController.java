@@ -21,13 +21,13 @@ import br.edu.ifbaiano.watermonitor.domain.service.ReadingService;
 @RestController
 @RequestMapping("/hydrometers/{hydrometerId}/readings")
 public class ReadingController {
-	
+
 	@Autowired
 	private ReadingService readingService;
-	
+
 	@Autowired
 	private ReadingRepository readingRepository;
-	
+
 	@GetMapping
 	public Optional<Reading> buscar(@PathVariable Long hydrometerId) {
 		return readingRepository.findById(hydrometerId);

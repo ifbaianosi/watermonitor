@@ -18,20 +18,20 @@ import br.edu.ifbaiano.watermonitor.domain.service.HydrometerService;
 @RestController
 @RequestMapping("/hydrometers")
 public class HydrometerController {
-	
+
 	@Autowired
 	private HydrometerService hydrometerSevice;
-	
+
 
 	@GetMapping("/{hydrometerId}")
 	public Hydrometer show(@PathVariable Long hydrometerId){
 		return hydrometerSevice.findOrFail(hydrometerId);
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Hydrometer create(@RequestBody Hydrometer hydrometer) {
 		return hydrometerSevice.save(hydrometer);
 	}
-	
+
 }

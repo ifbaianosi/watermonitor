@@ -9,21 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifbaiano.watermonitor.domain.model.Tank;
 import br.edu.ifbaiano.watermonitor.domain.repository.TankRepository;
-import br.edu.ifbaiano.watermonitor.domain.service.TankLevelService;
 
 @RestController
 @RequestMapping("/tank")
 public class TankController {
-	
+
 	@Autowired
 	private TankRepository tankRepository;
-	
-	@Autowired
-	private TankLevelService tankLevelService;
 
 	@GetMapping
 	public List<Tank> show () {
-		return tankRepository.findAll();	 
+		return tankRepository.findAll();
 	}
-	
+
 }
