@@ -83,32 +83,44 @@ export function makeServer() {
                   {
                       id: 1,
                       name: 'Tanque azul - Residência',
-                      description: ''
+                      description: '',
+                      registerStatus: false,
+                      waterLevel: 'FULL'
                   },
                   {
                     id: 2,
                     name: 'Portaria',
-                    description: ''
+                    description: '',
+                    registerStatus: true,
+                    waterLevel: 'FULL'
                   },
                   {
                     id: 3,
                     name: 'Aviário',
-                    description: ''
+                    description: '',
+                    registerStatus: false,
+                    waterLevel: 'FULL'
                   },
                   {
                     id: 4,
                     name: 'Sabotagem',
-                    description: ''
+                    description: '',
+                    registerStatus: true,
+                    waterLevel: 'FULL'
                   },
                   {
                     id: 5,
                     name: 'Tanque azul - Horta',
-                    description: ''
+                    description: '',
+                    registerStatus: true,
+                    waterLevel: 'FULL'
                   },
                   {
                     id: 6,
                     name: 'Tanque azul - Suíno',
-                    description: ''
+                    description: '',
+                    registerStatus: true,
+                    waterLevel: 'FULL'
                   }
               ]
             })

@@ -10,6 +10,8 @@ import { Tanks } from '../components/Tanks';
 export interface Tank {
     id: number;
     name: string;
+    registerStatus: boolean;
+    waterLevel: string; //mudar para enumeração
 }
 
 export function Home() {

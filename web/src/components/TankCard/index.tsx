@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
-import { RegistrationStatus } from "./RegistrationStatus";
+import { RegisterStatus } from "./RegisterStatus";
 import { WaterLevel } from "./WaterLevel";
 
 import registrationStatusImg from '../../assets/registration-status.svg'
@@ -24,7 +24,7 @@ export function TankCard( { tank }:TankCardProps ) {
                 />
                 <Stack>
                     <Text>Situaçao do resgistro</Text>
-                    <RegistrationStatus />
+                    <RegisterStatus status={tank.registerStatus} />
                 </Stack>
             </Flex>
             <Flex mt='6' gap='2'>
@@ -34,7 +34,7 @@ export function TankCard( { tank }:TankCardProps ) {
                 />
                 <Stack>
                     <Text>Nível da água</Text>
-                    <WaterLevel />
+                    <WaterLevel level={tank.waterLevel} />
                 </Stack>
             </Flex>
         </Box>

@@ -1,5 +1,9 @@
-export function WaterLevel() {
+interface WaterLevelProps {
+    level: string;
+}
+
+export function WaterLevel({ level }: WaterLevelProps) {
     return(
-        <h1>CHEIO</h1>
+        <h1>{level}</h1>
     )
 }
