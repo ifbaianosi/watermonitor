@@ -34,15 +34,15 @@ public class Reading {
 	@JoinColumn(nullable = false)
 	private Hydrometer hydrometer;
 
-	public Boolean readingValueGreaterThan(Integer reading, Integer lastReading) {
-		if(reading>=lastReading) {
+	public boolean readingValueGreaterThan(Integer lastReading) {
+		if(getReading()>lastReading) {
 			return true;
 		}else {
 			return false;
 		}
 	}
 
-	public Integer consume(Integer reading, Integer display) {
+	public Integer calculateConsume(Integer reading, Integer display) {
 		return reading-display;
 	}
 

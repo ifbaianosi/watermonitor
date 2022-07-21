@@ -27,10 +27,10 @@ public class ReadingService {
 	public Reading save(Reading reading, Long hydrometerId) {
 		Hydrometer hydrometer = hydrometerRepository.findById(hydrometerId).orElseThrow();
 
-		Boolean isBigger = reading.readingValueGreaterThan(reading.getReading(), hydrometer.getDisplay());
+		boolean isBigger = reading.readingValueGreaterThan(hydrometer.getDisplay());
 
 		if(isBigger) {
-			Integer consume = reading.consume(reading.getReading(), hydrometer.getDisplay());
+			Integer consume = reading.calculateConsume(reading.getReading(), hydrometer.getDisplay());
 
 			hydrometer.setDisplay(reading.getReading());
 			reading.setHydrometer(hydrometer);
