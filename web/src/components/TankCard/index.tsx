@@ -10,9 +10,10 @@ interface TankCardProps {
     tank: Tank
 }
 
-export function TankCard( { tank }:TankCardProps ) {
+export function TankCard( { tank }: TankCardProps ) {
+
     return(
-        <Box borderRadius={'lg'} bg={'white'} w='22rem' pt='12' pb='10' px='8' boxShadow='md' border='1px' borderColor='stroke'>
+        <Box borderRadius={'lg'} bg={'white'} w='22rem' pt='12' pb='10' px='8' boxShadow='md' border='1px' borderColor='stroke' >
             <Stack spacing='1'>
                 <Text>Reservatório</Text>
                 <Heading fontSize='xl' fontWeight='semibold' textTransform={'uppercase'}>{tank.name}</Heading>
@@ -34,7 +35,7 @@ export function TankCard( { tank }:TankCardProps ) {
                 />
                 <Stack>
                     <Text>Nível da água</Text>
-                    <WaterLevel level={tank.waterLevel} />
+                    <WaterLevel level={tank.waterLevel} /> 
                 </Stack>
             </Flex>
         </Box>

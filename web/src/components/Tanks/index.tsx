@@ -1,12 +1,6 @@
 import { Flex } from "@chakra-ui/react";
+import { Tank } from "../../pages/Home";
 import { TankCard } from "../TankCard";
-
-interface Tank {
-    id: number;
-    name: string;
-    registerStatus: boolean;
-    waterLevel: string; //mudar para enumeração
-}
 
 interface TanksProps {
     tanks: Tank[]

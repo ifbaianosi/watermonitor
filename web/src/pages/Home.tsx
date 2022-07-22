@@ -11,7 +11,7 @@ export interface Tank {
     id: number;
     name: string;
     registerStatus: boolean;
-    waterLevel: string; //mudar para enumeração
+    waterLevel: string
 }
 
 export function Home() {
@@ -79,6 +79,7 @@ export function Home() {
                     />
                 </InputGroup>
             </Flex>
+            
             <Tanks tanks={tanksFilter} />            
         </Container>
         </>

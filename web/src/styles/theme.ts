@@ -10,7 +10,7 @@ const theme = extendTheme({
         },
         red: '#E05257',
         redAlpha: 'RGBA(237, 28, 36, 0.05)',
-        redAlpha200: 'RGBA(237, 28, 36, 0.20)'
+        redAlpha200: 'RGBA(237, 28, 36, 0.20)',
     },
     fonts: {
       heading: `'Poppins', sans-serif`,

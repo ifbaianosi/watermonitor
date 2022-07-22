@@ -82,15 +82,15 @@ export function HydrometerReading() {
                         <Stack spacing={6}>
                             <Stack spacing={1}>
                                 <Skeleton w={'200px'} isLoaded={!!hydrometer} >
-                                    <Text >Número do hidrômetro</Text>   
-                                    <Text fontWeight={'medium'}>{hydrometer?.number}</Text>
+                                    <Text  >Número do hidrômetro</Text>   
+                                    <Text fontWeight={'semibold'}>{hydrometer?.number}</Text>
                                 </Skeleton>
                             </Stack>
 
                             <Stack spacing={1}>
                                 <Skeleton w={'200px'} isLoaded={!!hydrometer} >
                                     <Text w={'100%'}>Última leitura</Text>
-                                    <Text w={'100%'} fontWeight={'medium'}>{hydrometer?.updatedAt}</Text>
+                                    <Text w={'100%'} fontWeight={'semibold'}>{hydrometer?.updatedAt}</Text>
                                 </Skeleton>
                             </Stack>
 
