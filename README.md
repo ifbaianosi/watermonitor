@@ -12,11 +12,11 @@
 </p>
 
 <h1 align="center">
-    <img alt="watermonitor" title="watermonitor" src="https://github.com/ifbaianosi/assets/blob/main/watermonitor/watermonitor-cover-notion.png" />
-    <br />
-    <br />
-    <br />
     <img src="src/assets/logo.svg" />
+    <br />
+    <br />
+    <br />
+    <img alt="watermonitor" title="watermonitor" src="https://github.com/ifbaianosi/assets/blob/main/watermonitor/watermonitor-cover-notion.png" />
 </h1>
 
 
