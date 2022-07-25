@@ -12,7 +12,7 @@
 </p>
 
 <h1 align="center">
-    <img src="src/assets/logo.svg" />
+    <img src="web/src/assets/logo.svg" />
     <br />
     <br />
     <br />
@@ -180,7 +180,7 @@ Api rest desenvolvida em Java utilizando o spring framework
 #### **Diagrama de classe**
 <br />
 
-<img src="https://github.com/ifbaianosi/assets/blob/main/watermonitor/watermonitor-class-diagram.jpg" width="800px"/>
+<img src="https://github.com/ifbaianosi/assets/blob/main/watermonitor/watermonitor-class-diagram.JPG" width="800px"/>
 
 <br />
 
