@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Box, Flex, Icon, IconButton, Text, Image } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { FiArrowLeft } from 'react-icons/fi'
@@ -17,7 +18,9 @@ export function Header({title, navigateTo, children}: HeaderProps) {
     return(
         <Box as="header" w={'100vw'} bg={'white'} borderBottom={'1px'} borderColor={'stroke'}>
             <Flex  width={'100%'} margin={'auto'} maxWidth={'1120px'} as="header" justify={'space-between'} align={'center'} py="6">
-                <Image w={'11'} src={logoImg} alt="Logo watermonitor" />
+                <Link to={'/'}>
+                    <Image w={'11'} flex='1' src={logoImg} alt="Logo watermonitor" />
+                </Link>
                     
                 {title && <Text>{title}</Text>}
                 {children && children}

@@ -1,21 +1,12 @@
-import { Link } from 'react-router-dom'
-import { Container, Flex, Input, InputGroup, InputRightElement, Link as ChakraLink, Stack, Text } from "@chakra-ui/react";
-import { FiSearch } from 'react-icons/fi'
+import { Container, Flex, Input, InputGroup, InputRightElement, Skeleton, Stack, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { FiSearch } from "react-icons/fi";
+import { Header } from "../components/Header";
+import { Tanks } from "../components/Tanks";
+import { api } from "../services/api";
+import { Tank } from "./Home";
 
-import { Header } from '../components/Header';
-import { useEffect, useState } from 'react';
-import { api } from '../services/api';
-import { Tanks } from '../components/Tanks';
-
-export interface Tank {
-    id: number;
-    name: string;
-    registerStatus: boolean;
-    waterLevel: string
-}
-
-export function Home() {
-
+export function TankDailyControl() {
     const [tanks, setTanks] = useState<Tank[]>([])
     const [tanksFilter, setTanksFilter] = useState<Tank[]>([])
 
@@ -36,24 +27,9 @@ export function Home() {
 
     return(
         <>
-        <Header>
-            <Flex justify={'space-between'} w={'100%'} align={'center'}>
-                <Flex justify={'center'} width={'100%'} gap={'10'}>
-                    <Link to={'/dailycontrols'}>
-                        <ChakraLink fontSize={'0.875rem'}>CONTROLE DIÁRIO</ChakraLink>
-                    </Link>
-                    <Link to={'/hydrometer'}>
-                        <ChakraLink fontSize={'0.875rem'}>LEITURA DO HIDRÔMETRO</ChakraLink>
-                    </Link>
-                </Flex>
-                <Flex align={'center'} color={'#fff'}>
-                    {/* <Text mr={'2'} fontSize={'xs'} >Olá,</Text>
-                    <Text fontSize={'sm'} fontWeight={'semibold'} mr={'2'}>Glauber</Text>
-                    <IconButton aria-label="Sair da aplicação" bg={'white'} icon={<Icon as={FiLogOut} />} /> */}
-                </Flex>
-            </Flex>
-        </Header>
-        <Container maxWidth={'1120px'} p={'0'}>
+            <Header navigateTo="/" title="CONTROLE DIÁRIO DOS RESERVATÓRIOS" />
+
+            <Container maxWidth={'1120px'} p={'0'}>
             <Flex mt='10' justify={['space-between']} direction={['column', 'row']} gap='5'>
                 <Stack spacing={1}>
                     <Text fontSize={'1.375rem'} fontWeight='bold' lineHeight={'1.625rem'}>{tanks.length}</Text>
@@ -70,7 +46,7 @@ export function Home() {
                         border={'1px'} 
                         borderColor={'stroke'} 
                         boxShadow='md' 
-                        onChange={(e) => handleFilterTank(e.target.value)}
+                        // onChange={(e) => handleFilterTank(e.target.value)}
                     />
                     <InputRightElement
                         mt={'1'}
@@ -80,7 +56,18 @@ export function Home() {
                 </InputGroup>
             </Flex>
             
-            <Tanks tanks={tanksFilter} type='READ_ONLY' />            
+            {tanksFilter.length == 0 ? (
+                <Flex mt='12' gap='8' flexWrap='wrap' justify={['center', 'center', 'flex-start']}>
+                    <Skeleton h={'558px'} w='22rem' />
+                    <Skeleton h={'558px'} w='22rem' />
+                    <Skeleton h={'558px'} w='22rem' />
+                </Flex>
+            ) : (
+                <Tanks tanks={tanksFilter} />
+            )} 
+
+                         
+
         </Container>
         </>
     )
