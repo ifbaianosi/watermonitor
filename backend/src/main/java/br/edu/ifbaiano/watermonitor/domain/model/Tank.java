@@ -1,11 +1,13 @@
 package br.edu.ifbaiano.watermonitor.domain.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Tank {
@@ -17,6 +19,9 @@ public class Tank {
 	private String name;
 
 	private String description;
+	
+	@OneToMany(mappedBy = "tank")
+	private List<TankDailyControl> tankDailyControl;
 
 	public Long getId() {
 		return id;
@@ -40,6 +45,14 @@ public class Tank {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<TankDailyControl> getTankDailyControl() {
+		return tankDailyControl;
+	}
+
+	public void setTankDailyControl(List<TankDailyControl> tankDailyControl) {
+		this.tankDailyControl = tankDailyControl;
 	}
 
 	@Override

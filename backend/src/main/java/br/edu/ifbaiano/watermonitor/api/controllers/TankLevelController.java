@@ -11,40 +11,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifbaiano.watermonitor.domain.model.TankLevel;
-import br.edu.ifbaiano.watermonitor.domain.repository.TankLevelRepository;
-import br.edu.ifbaiano.watermonitor.domain.service.TankLevelService;
+import br.edu.ifbaiano.watermonitor.domain.model.TankDailyControl;
+import br.edu.ifbaiano.watermonitor.domain.repository.TankDailyControlRepository;
+import br.edu.ifbaiano.watermonitor.domain.service.TankDailyControlService;
 
 @RestController
-@RequestMapping("/tank/{tankId}/tanklevel")
+@RequestMapping("/tanks/{tankId}/tanklevel")
 public class TankLevelController {
 
 	@Autowired
-	private TankLevelService tankLevelService;
+	private TankDailyControlService tankLevelService;
 
 	@Autowired
-	private TankLevelRepository tankLevelRepository;
+	private TankDailyControlRepository tankLevelRepository;
 
 	@GetMapping
-	public List<TankLevel> show(@PathVariable Long tankId){
+	public List<TankDailyControl> show(@PathVariable Long tankId){
 		return tankLevelRepository.findAll();
 	}
 
 	@PostMapping()
-	public TankLevel create (@PathVariable Long tankId, @RequestBody TankLevel tankLevel) {
+	public TankDailyControl create (@PathVariable Long tankId, @RequestBody TankDailyControl tankLevel) {
 		return tankLevelService.save(tankLevel, tankId);
 	}
 
 	@PutMapping("/{tankLevelId}")
-	public TankLevel update(@PathVariable Long tankLevelId, @RequestBody TankLevel tankLevel) {
+	public TankDailyControl update(@PathVariable Long tankLevelId, @RequestBody TankDailyControl tankLevel) {
 
-		TankLevel tankLevelDataBase = tankLevelService.findOrFail(tankLevelId);
+		TankDailyControl tankDailyControlDataBase = tankLevelService.findOrFail(tankLevelId);
 
-		tankLevelDataBase.setWaterLevel(tankLevel.getWaterLevel());
+		tankDailyControlDataBase.setWaterLevel(tankLevel.getWaterLevel());
 
-		System.out.println("--------------------------------->"+tankLevel.getCreatedAt());
-
-		return tankLevelService.save(tankLevelDataBase, tankLevelId);
+		return tankLevelService.save(tankDailyControlDataBase, tankLevelId);
 	}
 
 

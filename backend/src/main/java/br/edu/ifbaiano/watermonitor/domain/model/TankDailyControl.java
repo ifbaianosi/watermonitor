@@ -14,8 +14,10 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class TankLevel {
+public class TankDailyControl {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +29,10 @@ public class TankLevel {
 
 	@Enumerated(EnumType.STRING)
 	private WaterLevel waterLevel = WaterLevel.EMPTY;
+	
+	private boolean registerStatus = true;
 
+	@JsonIgnore
 	@ManyToOne
 	private Tank tank;
 
@@ -57,6 +62,12 @@ public class TankLevel {
 		this.tank = tank;
 	}
 
+	public boolean isRegisterStatus() {
+		return registerStatus;
+	}
+	public void setRegisterStatus(boolean registerStatus) {
+		this.registerStatus = registerStatus;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -67,7 +78,7 @@ public class TankLevel {
 			return true;
 		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
-		TankLevel other = (TankLevel) obj;
+		TankDailyControl other = (TankDailyControl) obj;
 		return Objects.equals(id, other.id);
 	}
 }
