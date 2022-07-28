@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import br.edu.ifbaiano.watermonitor.domain.model.Tank;
 import br.edu.ifbaiano.watermonitor.domain.model.TankDailyControl;
 import br.edu.ifbaiano.watermonitor.domain.repository.TankRepository;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/tanks")
 public class TankController {
@@ -45,11 +47,12 @@ public class TankController {
 		
 		for(int i = 0; i<tank.size(); i++) {
 			int n = tank.get(i).getTankDailyControl().size();
-			
-			tankDailyControl = tank.get(i).getTankDailyControl().get(n-1);
-			tank.get(i).getTankDailyControl().removeAll(tank.get(i).getTankDailyControl());
-			tank.get(i).getTankDailyControl().add(tankDailyControl);
-
+						
+			if(n > 0) {
+				tankDailyControl = tank.get(i).getTankDailyControl().get(n-1);
+				tank.get(i).getTankDailyControl().removeAll(tank.get(i).getTankDailyControl());
+				tank.get(i).getTankDailyControl().add(tankDailyControl);				
+			}	
 		}
 		
 		return tank;

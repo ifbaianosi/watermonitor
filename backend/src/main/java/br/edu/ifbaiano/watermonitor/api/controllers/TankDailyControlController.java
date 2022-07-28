@@ -2,6 +2,7 @@ package br.edu.ifbaiano.watermonitor.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifbaiano.watermonitor.domain.model.TankDailyControl;
 import br.edu.ifbaiano.watermonitor.domain.service.TankDailyControlService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/tanks/{tankId}/daily-controls")
 public class TankDailyControlController {
