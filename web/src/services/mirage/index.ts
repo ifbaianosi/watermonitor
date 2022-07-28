@@ -1,4 +1,5 @@
 import { createServer, Model, belongsTo, hasMany } from 'miragejs'
+import { RegisterStatus } from '../../components/TankCard/RegisterStatus';
 
 // type Hydrometer = {
 //     id: number;
@@ -31,7 +32,10 @@ export function makeServer() {
             this.namespace = 'api'
             this.timing = 750
 
-            this.get('/hydrometers/:id');
+            this.get('/hydrometers/:id', (schema, request) => {
+              let id = request.params.id;              
+              return schema.db.hydrometers.find(id);
+            });
             this.post('/hydrometers/:id/readings', (schema, request) => {
                 let id = request.params.id
                 let attrs = JSON.parse(request.requestBody)
@@ -59,7 +63,9 @@ export function makeServer() {
 
                 return schema.db.readings.insert(newReadingData)
             })
-            this.get('/tanks');
+            this.get('/tanks', (schema, request) => {
+              return schema.db.tanks;
+            });
 
             this.namespace = ''
             this.passthrough()
@@ -84,43 +90,61 @@ export function makeServer() {
                     id: 1,
                     name: 'Tanque azul - Residência',
                     description: '',
-                    registerStatus: false,
-                    waterLevel: 'FULL',                  
+                    lastDailyControl: {
+                      date: '2022-07-28T15:17:00',
+                      registerStatus: true,
+                      waterLevel: 'MIDDLE'
+                    }                
                   },
                   {
                     id: 2,
                     name: 'Portaria',
                     description: '',
-                    registerStatus: true,
-                    waterLevel: 'ALMOST_FULL',                  
+                    lastDailyControl: {
+                      date: '2022-07-28T15:17:00',
+                      registerStatus: true,
+                      waterLevel: 'ALMOST_FULL'
+                    }                
                   },
                   {
                     id: 3,
                     name: 'Aviário',
                     description: '',
-                    registerStatus: false,
-                    waterLevel: 'MIDDLE',                  
+                    lastDailyControl: {
+                      date: '2022-07-28T15:17:00',
+                      registerStatus: false,
+                      waterLevel: 'MIDDLE'
+                    }                    
                   },
                   {
                     id: 4,
                     name: 'Sabotagem',
                     description: '',
-                    registerStatus: true,
-                    waterLevel: 'LOW',                  
+                    lastDailyControl: {
+                      date: '2022-07-28T15:17:00',
+                      registerStatus: true,
+                      waterLevel: 'LOW'
+                    } 
                   },
                   {
                     id: 5,
                     name: 'Tanque azul - Horta',
                     description: '',
-                    registerStatus: true,
-                    waterLevel: 'EMPTY'
+                    lastDailyControl: {
+                      date: '2022-07-28T15:17:00',
+                      registerStatus: true,
+                      waterLevel: 'EMPTY'
+                    } 
                   },
                   {
                     id: 6,
                     name: 'Tanque azul - Suíno',
                     description: '',
-                    registerStatus: true,
-                    waterLevel: 'FULL'
+                    lastDailyControl: {
+                      date: '2022-07-28T15:17:00',
+                      registerStatus: true,
+                      waterLevel: 'FULL'
+                    } 
                   }
               ]
             })

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, Flex, Input, InputGroup, InputRightElement, Link as ChakraLink, Stack, Text } from "@chakra-ui/react";
+import { Container, Flex, Input, InputGroup, InputRightElement, Link as ChakraLink, Skeleton, Stack, Text } from "@chakra-ui/react";
 import { FiSearch } from 'react-icons/fi'
 
 import { Header } from '../components/Header';
@@ -10,8 +10,12 @@ import { Tanks } from '../components/Tanks';
 export interface Tank {
     id: number;
     name: string;
-    registerStatus: boolean;
-    waterLevel: string
+    description: string;    
+    lastDailyControl: {
+        date: string,
+        registerStatus: boolean,
+        waterLevel: string
+    } | null
 }
 
 export function Home() {
@@ -21,9 +25,9 @@ export function Home() {
 
     useEffect(() => {
         async function loadData() {
-            const response = await api.get('/tanks')
-            setTanks(response.data.tanks)
-            setTanksFilter(response.data.tanks)
+            const response = await api.get<Tank[]>('/tanks')
+            setTanks(response.data)
+            setTanksFilter(response.data)
         }
 
         loadData()
@@ -79,8 +83,17 @@ export function Home() {
                     />
                 </InputGroup>
             </Flex>
+
+            {tanksFilter.length == 0 ? (
+                <Flex mt='12' gap='8' flexWrap='wrap' justify={['center', 'center', 'flex-start']}>
+                    <Skeleton h={'345px'} w='22rem'  borderRadius={'lg'} />
+                    <Skeleton h={'345px'} w='22rem'  borderRadius={'lg'} />
+                    <Skeleton h={'345px'} w='22rem'  borderRadius={'lg'} />
+                </Flex>
+            ) : (
+                <Tanks tanks={tanksFilter} type='READ_ONLY' />            
+            )} 
             
-            <Tanks tanks={tanksFilter} type='READ_ONLY' />            
         </Container>
         </>
     )

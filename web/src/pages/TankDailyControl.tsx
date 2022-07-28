@@ -13,8 +13,8 @@ export function TankDailyControl() {
     useEffect(() => {
         async function loadData() {
             const response = await api.get('/tanks')
-            setTanks(response.data.tanks)
-            setTanksFilter(response.data.tanks)
+            setTanks(response.data)
+            setTanksFilter(response.data)
         }
 
         loadData()
@@ -58,9 +58,9 @@ export function TankDailyControl() {
             
             {tanksFilter.length == 0 ? (
                 <Flex mt='12' gap='8' flexWrap='wrap' justify={['center', 'center', 'flex-start']}>
-                    <Skeleton h={'558px'} w='22rem' />
-                    <Skeleton h={'558px'} w='22rem' />
-                    <Skeleton h={'558px'} w='22rem' />
+                    <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
+                    <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
+                    <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
                 </Flex>
             ) : (
                 <Tanks tanks={tanksFilter} />
