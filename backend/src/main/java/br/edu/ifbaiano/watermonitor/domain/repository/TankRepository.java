@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import br.edu.ifbaiano.watermonitor.domain.model.Tank;
 
 @Repository
-public interface TankRepository extends JpaRepository<Tank, Long>, TankRepositoryQueries{
+public interface TankRepository extends JpaRepository<Tank, Long>{
 
 	@Query("select distinct(t) from Tank t left join fetch t.tankDailyControl")
 	List<Tank> findAllWithLastDailyControl();
