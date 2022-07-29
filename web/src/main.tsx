@@ -8,9 +8,9 @@ import { makeServer } from './services/mirage';
 
 import App from './App'
 
-if (import.meta.env.DEV) {
-  makeServer()
-}
+// if (import.meta.env.DEV) {
+//   makeServer()
+// }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

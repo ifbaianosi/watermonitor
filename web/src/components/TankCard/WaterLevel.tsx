@@ -5,8 +5,6 @@ interface WaterLevelProps {
 }
 
 export function WaterLevel({level}: WaterLevelProps) {
-
-
     return(
         renderIcon(level)
     );

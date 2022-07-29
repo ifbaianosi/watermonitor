@@ -11,7 +11,6 @@ interface TankCardProps {
 }
 
 export function TankCard( { tank }: TankCardProps ) {
-
     return(
         <Box borderRadius={'lg'} bg={'white'} w='22rem' pt='12' pb='10' px='8' boxShadow='md' border='1px' borderColor='stroke' >
             <Stack spacing='1'>
@@ -25,7 +24,12 @@ export function TankCard( { tank }: TankCardProps ) {
                 />
                 <Stack gap={'0.5rem'}>
                     <Text>Situaçao do resgistro</Text>
-                    <RegisterStatus status={tank.registerStatus} readOnly={true} />
+                    {tank.lastDailyControl ? (
+                        <RegisterStatus status={tank.lastDailyControl.registerStatus} readOnly={true} />
+                    ) : (
+                        <Text fontSize={'0.75rem'} color={'gray.400'}>Dados não encontrado</Text>
+                    )}
+                    
                 </Stack>
             </Flex>
             <Flex mt='6' gap='2'>
@@ -34,8 +38,12 @@ export function TankCard( { tank }: TankCardProps ) {
                     alt='Nível da água'
                 />
                 <Stack>
-                    <Text>Nível da água</Text>                    
-                    <WaterLevel level={tank.waterLevel} />
+                    <Text>Nível da água</Text>
+                    {tank.lastDailyControl ? (
+                        <WaterLevel level={tank.lastDailyControl.waterLevel} />
+                    ) : (
+                        <Text fontSize={'0.75rem'} color={'gray.400'}>Dados não encontrado</Text>
+                    )}                  
                 </Stack>
             </Flex>
         </Box>

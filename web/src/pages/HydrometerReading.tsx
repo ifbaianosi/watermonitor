@@ -61,10 +61,10 @@ export function HydrometerReading() {
             const {data} = await api.get(`hydrometers/${1}`)
 
             setHydrometer({
-                id: Number(data.hydrometer.id),
-                number: data.hydrometer.number,
-                display: String(data.hydrometer.display).length === 7 ? String(data.hydrometer.display) : String(`0${data.hydrometer.display}`),
-                updatedAt: formatDateTime(new Date(data.hydrometer.updatedAt))
+                id: Number(data.id),
+                number: data.number,
+                display: String(data.display).length === 7 ? String(data.display) : String(`0${data.display}`),
+                updatedAt: formatDateTime(new Date(data.updatedAt))
             })
         }
 
