@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifbaiano.watermonitor.domain.model.TankDailyControl;
-import br.edu.ifbaiano.watermonitor.domain.service.TankDailyControlService;
+import br.edu.ifbaiano.watermonitor.domain.model.DailyControl;
+import br.edu.ifbaiano.watermonitor.domain.service.DailyControlService;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/tanks/{tankId}/daily-controls")
-public class TankDailyControlController {
+public class DailyControlController {
 
 	@Autowired
-	private TankDailyControlService tankDailyControlService;
+	private DailyControlService DailyControlService;
 	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public TankDailyControl create(@PathVariable Long tankId, @RequestBody TankDailyControl tankDailyControl) {
-		return tankDailyControlService.save(tankDailyControl, tankId);
+	public DailyControl create(@PathVariable Long tankId, @RequestBody DailyControl dailyControl) {
+		return DailyControlService.save(dailyControl, tankId);
 	
 	}
 	

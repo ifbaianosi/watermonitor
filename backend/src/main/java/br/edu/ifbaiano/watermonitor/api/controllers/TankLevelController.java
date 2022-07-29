@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifbaiano.watermonitor.domain.model.TankDailyControl;
-import br.edu.ifbaiano.watermonitor.domain.repository.TankDailyControlRepository;
-import br.edu.ifbaiano.watermonitor.domain.service.TankDailyControlService;
+import br.edu.ifbaiano.watermonitor.domain.model.DailyControl;
+import br.edu.ifbaiano.watermonitor.domain.repository.DailyControlRepository;
+import br.edu.ifbaiano.watermonitor.domain.service.DailyControlService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -22,29 +22,29 @@ import br.edu.ifbaiano.watermonitor.domain.service.TankDailyControlService;
 public class TankLevelController {
 
 	@Autowired
-	private TankDailyControlService tankLevelService;
+	private DailyControlService tankLevelService;
 
 	@Autowired
-	private TankDailyControlRepository tankLevelRepository;
+	private DailyControlRepository tankLevelRepository;
 
 	@GetMapping
-	public List<TankDailyControl> show(@PathVariable Long tankId){
+	public List<DailyControl> show(@PathVariable Long tankId){
 		return tankLevelRepository.findAll();
 	}
 
 	@PostMapping()
-	public TankDailyControl create (@PathVariable Long tankId, @RequestBody TankDailyControl tankLevel) {
+	public DailyControl create (@PathVariable Long tankId, @RequestBody DailyControl tankLevel) {
 		return tankLevelService.save(tankLevel, tankId);
 	}
 
 	@PutMapping("/{tankLevelId}")
-	public TankDailyControl update(@PathVariable Long tankLevelId, @RequestBody TankDailyControl tankLevel) {
+	public DailyControl update(@PathVariable Long tankLevelId, @RequestBody DailyControl tankLevel) {
 
-		TankDailyControl tankDailyControlDataBase = tankLevelService.findOrFail(tankLevelId);
+		DailyControl dailyControlDataBase = tankLevelService.findOrFail(tankLevelId);
 
-		tankDailyControlDataBase.setWaterLevel(tankLevel.getWaterLevel());
+		dailyControlDataBase.setWaterLevel(tankLevel.getWaterLevel());
 
-		return tankLevelService.save(tankDailyControlDataBase, tankLevelId);
+		return tankLevelService.save(dailyControlDataBase, tankLevelId);
 	}
 
 

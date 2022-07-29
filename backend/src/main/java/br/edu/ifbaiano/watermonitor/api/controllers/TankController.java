@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifbaiano.watermonitor.domain.model.Tank;
-import br.edu.ifbaiano.watermonitor.domain.model.TankDailyControl;
+import br.edu.ifbaiano.watermonitor.domain.model.DailyControl;
 import br.edu.ifbaiano.watermonitor.domain.repository.TankRepository;
 
 @CrossOrigin(origins = "*")
@@ -27,12 +27,9 @@ public class TankController {
 	@GetMapping
 	public List<Tank> list () {
 		
-		 List<Tank> tank = tankRepository.findAllWithLastDailyControl();
-		 
-		 dailyControlRecent(tank);
+		 List<Tank> tank = tankRepository.findAll();
 		 		
-		 return tank;
-		
+		 return tank;	
 	}
 	
 	@PostMapping
@@ -41,20 +38,4 @@ public class TankController {
 		return tankRepository.save(tank);
 	}
 		
-	private List<Tank> dailyControlRecent(List<Tank> tank){
-		
-		TankDailyControl tankDailyControl;
-		
-		for(int i = 0; i<tank.size(); i++) {
-			int n = tank.get(i).getTankDailyControl().size();
-						
-			if(n > 0) {
-				tankDailyControl = tank.get(i).getTankDailyControl().get(n-1);
-				tank.get(i).getTankDailyControl().removeAll(tank.get(i).getTankDailyControl());
-				tank.get(i).getTankDailyControl().add(tankDailyControl);				
-			}	
-		}
-		
-		return tank;
-	}
 }

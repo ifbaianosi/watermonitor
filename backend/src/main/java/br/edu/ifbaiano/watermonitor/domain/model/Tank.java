@@ -1,13 +1,13 @@
 package br.edu.ifbaiano.watermonitor.domain.model;
 
-import java.util.List;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Tank {
@@ -20,9 +20,9 @@ public class Tank {
 
 	private String description;
 	
-	@OneToMany(mappedBy = "tank")
-	private List<TankDailyControl> tankDailyControl;
-
+	@Embedded
+	private LastDailyControl lastDailyControl;
+	
 	public Long getId() {
 		return id;
 	}
@@ -47,12 +47,12 @@ public class Tank {
 		this.description = description;
 	}
 
-	public List<TankDailyControl> getTankDailyControl() {
-		return tankDailyControl;
+	public LastDailyControl getLastDailyControl() {
+		return lastDailyControl;
 	}
 
-	public void setTankDailyControl(List<TankDailyControl> tankDailyControl) {
-		this.tankDailyControl = tankDailyControl;
+	public void setLastDailyControl(LastDailyControl lastDailyControl) {
+		this.lastDailyControl = lastDailyControl;
 	}
 
 	@Override
@@ -70,5 +70,15 @@ public class Tank {
 		return Objects.equals(id, other.id);
 	}
 
+	public void updateLastDailyControl(DailyControl DailyControl) {
+		if(getLastDailyControl()== null) {
+			this.setLastDailyControl(new LastDailyControl());
+
+		}
+		
+		getLastDailyControl().setDate(OffsetDateTime.now());
+		getLastDailyControl().setLevel(DailyControl.getWaterLevel());
+		getLastDailyControl().setRegisterStatus(DailyControl.getRegisterStatus());			
+	}
 
 }

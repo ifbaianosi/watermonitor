@@ -17,7 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class TankDailyControl {
+public class DailyControl {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,7 +62,7 @@ public class TankDailyControl {
 		this.tank = tank;
 	}
 
-	public boolean isRegisterStatus() {
+	public boolean getRegisterStatus() {
 		return registerStatus;
 	}
 	public void setRegisterStatus(boolean registerStatus) {
@@ -78,7 +78,7 @@ public class TankDailyControl {
 			return true;
 		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
-		TankDailyControl other = (TankDailyControl) obj;
+		DailyControl other = (DailyControl) obj;
 		return Objects.equals(id, other.id);
 	}
 }
