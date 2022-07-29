@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifbaiano.watermonitor.domain.model.Tank;
-import br.edu.ifbaiano.watermonitor.domain.model.DailyControl;
 import br.edu.ifbaiano.watermonitor.domain.repository.TankRepository;
 
 @CrossOrigin(origins = "*")
