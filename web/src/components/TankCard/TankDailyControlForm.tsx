@@ -30,16 +30,16 @@ export function TankDailyControlForm({tank}: TankCardProps) {
                 </Flex>
                 <RegisterStatus status={tank.lastDailyControl?.registerStatus || REGISTER_STATUS_DEFAULT_VALUE} />
             </Stack>
-            <Flex mt='6' gap='2'>
-                <Image
-                    src={waterLevelImg}
-                    alt='Nível da água'
-                />
-                <Stack>
-                    <Text>Nível da água</Text>               
-                    <WaterLevel level={tank.lastDailyControl?.waterLevel || 'VAZIO'} />
-                </Stack>
-            </Flex>
+            <Stack mt='6' gap='2'>
+                <Flex align={'center'} gap={'0.5rem'}>
+                    <Image
+                        src={waterLevelImg}
+                        alt='Nível da água'
+                    />
+                    <Text>Nível da água</Text>    
+                </Flex>               
+                <WaterLevel level={tank.lastDailyControl?.waterLevel || 'VAZIO'} />
+            </Stack>
         </Box>
     )
 }

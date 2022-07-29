@@ -40,7 +40,7 @@ export function TankCard( { tank }: TankCardProps ) {
                 <Stack>
                     <Text>Nível da água</Text>
                     {tank.lastDailyControl ? (
-                        <WaterLevel level={tank.lastDailyControl.waterLevel} />
+                        <WaterLevel level={tank.lastDailyControl.waterLevel} readOnly={true} />
                     ) : (
                         <Text fontSize={'0.75rem'} color={'gray.400'}>Dados não encontrado</Text>
                     )}                  
