@@ -22,10 +22,10 @@ USE `watermonitor` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `watermonitor`.`tank` (
   `id` BIGINT(60) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NULL,
+  `name` VARCHAR(100) NOT NULL,
   `description` VARCHAR(100) NULL,
-  `date` DATETIME NULL,
-  `water_level` VARCHAR(45) NULL,
+  `date` DATETIME NOT NULL,
+  `water_level` VARCHAR(45) NOT NULL,
   `register_status` TINYINT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -68,8 +68,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `watermonitor`.`reading` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `created_at` DATETIME NOT NULL,
-  `consume` INT NULL,
-  `reading` INT NULL,
+  `consume` INT NOT NULL,
+  `reading` INT NOT NULL,
   `hydrometer_id` BIGINT(60) NOT NULL,
   PRIMARY KEY (`id`, `hydrometer_id`),
   INDEX `fk_reading_hydrometer1_idx` (`hydrometer_id` ASC) VISIBLE,

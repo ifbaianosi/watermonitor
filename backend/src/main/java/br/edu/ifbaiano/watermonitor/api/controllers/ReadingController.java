@@ -2,6 +2,8 @@ package br.edu.ifbaiano.watermonitor.api.controllers;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,7 +37,7 @@ public class ReadingController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Reading create(@RequestBody Reading reading, @PathVariable Long hydrometerId) {
+	public Reading create(@Valid @RequestBody Reading reading, @PathVariable Long hydrometerId) {
 		return readingService.save(reading, hydrometerId);
 	}
 }

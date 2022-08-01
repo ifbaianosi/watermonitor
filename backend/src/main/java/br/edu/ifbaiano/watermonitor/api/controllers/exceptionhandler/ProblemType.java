@@ -4,7 +4,8 @@ public enum ProblemType {
 
 	ENTITY_NOT_FOUND("Entity not founded."),
 	ENTITY_IN_USE("Entity in use."),
-	DOMAIN_ERROR("Violation domain rules.");
+	DOMAIN_ERROR("Violation domain rules."),
+	DADOS_INVALIDOS("Dados inválidos");
 	
 	private String title;
 	

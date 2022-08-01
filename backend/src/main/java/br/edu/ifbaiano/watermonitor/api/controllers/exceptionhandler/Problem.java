@@ -11,7 +11,69 @@ public class Problem {
 	private Integer status;
 	private String title;
 	private String detail;
+	private List<Field> fields;
+
 	private List<Problem.Object> objects;
+	
+	public static class Field{
+		private String name;
+		private String userMessage;
+		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getUserMessage() {
+			return userMessage;
+		}
+		public void setUserMessage(String userMessage) {
+			this.userMessage = userMessage;
+		}
+		
+		public static FieldBuilder builder() {
+            return new FieldBuilder();
+        }
+		
+		public static final class FieldBuilder {
+			private String name;
+			private String userMessage;
+			
+			private FieldBuilder() {
+				
+			}
+			
+			public static FieldBuilder anField() {
+				return new FieldBuilder();
+			}
+			
+			public FieldBuilder name(String name) {
+				this.name = name;
+				return this;
+			}
+			
+			public FieldBuilder userMessage(String userMessage) {
+				this.userMessage = userMessage;
+				return this;
+			}
+			
+			public Field build() {
+				Field field = new Field();
+				field.setName(name);
+				field.setUserMessage(userMessage);
+				return field;
+			}
+			
+		}
+	}
+	
+	public List<Field> getFields() {
+		return fields;
+	}
+	public void setFields(List<Field> fields) {
+		this.fields = fields;
+	}
 	
 	public List<Problem.Object> getObjects() {
 		return objects;
@@ -100,6 +162,7 @@ public class Problem {
 	        private Integer status;
 	        private String title;
 	        private String detail;
+	        private List<Field> fields;
 	        private List<Problem.Object> objects;
 
 	        private ProblemBuilder() {
@@ -120,6 +183,10 @@ public class Problem {
 	            return this;
 	        }
 
+	        public ProblemBuilder fields(List<Problem.Field> fields) {
+	        	this.fields = fields;
+	        	return this;
+	        }
 
 	        public ProblemBuilder objects(List<Problem.Object> objects) {
 	            this.objects = objects;
@@ -131,6 +198,7 @@ public class Problem {
 	            problem.setStatus(status);
 	            problem.setTitle(title);
 	            problem.setDetail(detail);
+	            problem.setFields(fields);
 	            problem.setObjects(objects);
 	            return problem;
 	        }

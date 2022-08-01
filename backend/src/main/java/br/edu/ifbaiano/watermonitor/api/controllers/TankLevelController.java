@@ -2,6 +2,8 @@ package br.edu.ifbaiano.watermonitor.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +35,12 @@ public class TankLevelController {
 	}
 
 	@PostMapping()
-	public DailyControl create (@PathVariable Long tankId, @RequestBody DailyControl tankLevel) {
+	public DailyControl create (@Valid @PathVariable Long tankId, @RequestBody DailyControl tankLevel) {
 		return tankLevelService.save(tankLevel, tankId);
 	}
 
 	@PutMapping("/{tankLevelId}")
-	public DailyControl update(@PathVariable Long tankLevelId, @RequestBody DailyControl tankLevel) {
+	public DailyControl update(@Valid @PathVariable Long tankLevelId, @RequestBody DailyControl tankLevel) {
 
 		DailyControl dailyControlDataBase = tankLevelService.findOrFail(tankLevelId);
 

@@ -2,6 +2,8 @@ package br.edu.ifbaiano.watermonitor.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,7 +26,7 @@ public class TankController {
 	private TankRepository tankRepository;
 	
 	@GetMapping
-	public List<Tank> list () {
+	public List<Tank> list() {
 		
 		 List<Tank> tank = tankRepository.findAll();
 		 		
@@ -33,7 +35,7 @@ public class TankController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Tank create(@RequestBody Tank tank) {
+	public Tank create(@Valid @RequestBody Tank tank) {
 		return tankRepository.save(tank);
 	}
 		

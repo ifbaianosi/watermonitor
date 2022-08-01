@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,6 +21,7 @@ public class Hydrometer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank
 	@Column(nullable = false)
 	private String number;
 
@@ -27,6 +29,7 @@ public class Hydrometer {
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime updatedAt;
 
+	@NotBlank
 	@Column(nullable = false)
 	private Integer display;
 

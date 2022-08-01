@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -27,7 +28,12 @@ public class Reading {
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime createdAt;
 
+	@NotBlank
+	@Column(nullable = false)
 	private Integer consume;
+	
+	@NotBlank
+	@Column(nullable = false)
 	private Integer reading;
 
 	@ManyToOne
