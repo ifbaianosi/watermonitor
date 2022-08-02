@@ -1,4 +1,4 @@
-package br.edu.ifbaiano.watermonitor.api.controllers.exceptionhandler;
+package br.edu.ifbaiano.watermonitor.api.exceptionhandler;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,13 +15,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import br.edu.ifbaiano.watermonitor.domain.exception.DomainException;
 import br.edu.ifbaiano.watermonitor.domain.exception.EntityInUseException;
-import br.edu.ifbaiano.watermonitor.domain.exception.EntityNotFoundedException;
+import br.edu.ifbaiano.watermonitor.domain.exception.EntityNotFoundException;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(EntityNotFoundedException.class)
-	public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundedException e,
+	@ExceptionHandler(EntityNotFoundException.class)
+	public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e,
 			WebRequest request){
 		
 		HttpStatus status = HttpStatus.NOT_FOUND;

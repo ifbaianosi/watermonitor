@@ -1,4 +1,4 @@
-package br.edu.ifbaiano.watermonitor.api.controllers.exceptionhandler;
+package br.edu.ifbaiano.watermonitor.api.exceptionhandler;
 
 import java.util.List;
 
