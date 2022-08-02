@@ -28,7 +28,6 @@ public class Reading {
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime createdAt;
 
-	@NotBlank
 	@Column(nullable = false)
 	private Integer consume;
 	
