@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS `watermonitor`.`tank` (
   `id` BIGINT(60) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `description` VARCHAR(100) NULL,
-  `date` DATETIME NOT NULL,
-  `water_level` VARCHAR(45) NOT NULL,
+  `date` DATETIME NULL,
+  `water_level` VARCHAR(45) NULL,
   `register_status` TINYINT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;

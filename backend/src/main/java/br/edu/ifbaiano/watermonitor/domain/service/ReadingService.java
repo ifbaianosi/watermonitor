@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifbaiano.watermonitor.domain.exception.DomainException;
+import br.edu.ifbaiano.watermonitor.domain.exception.EntityNotFoundException;
 import br.edu.ifbaiano.watermonitor.domain.model.Hydrometer;
 import br.edu.ifbaiano.watermonitor.domain.model.Reading;
 import br.edu.ifbaiano.watermonitor.domain.repository.HydrometerRepository;
@@ -25,7 +26,8 @@ public class ReadingService {
 
 	@Transactional
 	public Reading save(Reading reading, Long hydrometerId) {
-		Hydrometer hydrometer = hydrometerRepository.findById(hydrometerId).orElseThrow();
+		Hydrometer hydrometer = hydrometerRepository.findById(hydrometerId)
+				.orElseThrow(() -> new EntityNotFoundException(String .format("Hidrômetro de código %d não encontrado.", hydrometerId)));
 
 		boolean isBigger = reading.readingValueGreaterThan(hydrometer.getDisplay());
 

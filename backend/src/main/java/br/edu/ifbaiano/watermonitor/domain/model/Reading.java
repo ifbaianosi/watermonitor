@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -31,7 +31,7 @@ public class Reading {
 	@Column(nullable = false)
 	private Integer consume;
 	
-	@NotBlank
+	@NotNull
 	@Column(nullable = false)
 	private Integer reading;
 

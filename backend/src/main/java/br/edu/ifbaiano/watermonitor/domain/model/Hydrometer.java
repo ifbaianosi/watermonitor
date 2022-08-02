@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -29,7 +30,7 @@ public class Hydrometer {
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime updatedAt;
 
-	@NotBlank
+	@NotNull
 	@Column(nullable = false)
 	private Integer display;
 
