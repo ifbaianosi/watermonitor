@@ -26,17 +26,13 @@ public class TankController {
 	private TankRepository tankRepository;
 	
 	@GetMapping
-	public List<Tank> list() {
-		
-		 List<Tank> tank = tankRepository.findAll();
-		 		
-		 return tank;	
+	public List<Tank> list() {		
+		return tankRepository.findAll();
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Tank create(@Valid @RequestBody Tank tank) {
 		return tankRepository.save(tank);
-	}
-		
+	}		
 }

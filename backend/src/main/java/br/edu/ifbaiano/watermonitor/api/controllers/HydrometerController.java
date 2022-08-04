@@ -35,5 +35,4 @@ public class HydrometerController {
 	public Hydrometer create(@Valid @RequestBody Hydrometer hydrometer) {
 		return hydrometerSevice.save(hydrometer);
 	}
-
 }

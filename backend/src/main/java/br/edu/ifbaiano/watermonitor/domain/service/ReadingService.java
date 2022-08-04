@@ -45,4 +45,5 @@ public class ReadingService {
 
 		return readingRepository.save(reading);
 	}
+	
 }
