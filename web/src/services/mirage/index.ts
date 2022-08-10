@@ -93,7 +93,7 @@ export function makeServer() {
                     lastDailyControl: {
                       date: '2022-07-28T15:17:00',
                       registerStatus: true,
-                      waterLevel: 'MIDDLE'
+                      waterLevel: 'FULL'
                     }                
                   },
                   {

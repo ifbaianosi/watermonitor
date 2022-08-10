@@ -1,11 +1,11 @@
 import { Box, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { RegisterStatus } from "./RegisterStatus";
-import { WaterLevel } from "./WaterLevel";
 
 import registerStatusImg from '../../assets/registration-status.svg'
 import waterLevelImg from '../../assets/water-level.svg'
 
 import { Tank } from "../../pages/Home";
+import { WaterLevel } from "./WaterLevel";
 
 const REGISTER_STATUS_DEFAULT_VALUE = false
 
@@ -38,7 +38,7 @@ export function TankDailyControlForm({tank}: TankCardProps) {
                     />
                     <Text>Nível da água</Text>    
                 </Flex>               
-                <WaterLevel level={tank.lastDailyControl?.waterLevel || 'VAZIO'} />
+                <WaterLevel level={tank.lastDailyControl?.waterLevel || 'CHEIO'} />
             </Stack>
         </Box>
     )

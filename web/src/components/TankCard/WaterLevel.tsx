@@ -1,77 +1,124 @@
-import { Center, Flex, Heading } from "@chakra-ui/react";
+import { Box, Center, Flex, Heading, HStack, useRadio, useRadioGroup } from "@chakra-ui/react"
 
 interface WaterLevelProps {
     level: string
     readOnly?: boolean;
 }
+  
+// Step 2: Use the `useRadioGroup` hook to control a group of custom radios.
+export function WaterLevel({level}: WaterLevelProps) {
+    const options = ['CHEIO', 'ACIMA DO MEIO', 'PELO MEIO', 'ABAIXO DO MEIO', 'VAZIO']
 
-export function WaterLevel({level, readOnly=false}: WaterLevelProps) {
-    return(
-        renderComponent(level)
-    );
+    const { getRootProps, getRadioProps } = useRadioGroup({
+        name: 'waterlevel',
+        defaultValue: level,
+        onChange: console.log,
+    })
 
-    function renderComponent(level: string) {
-        if (readOnly) {
-            switch (level) {
-                case 'EMPTY':
-                    return (
-                        <Center px={'3'} h={'1.75rem'} bg={'hsla(358, 85%, 52%, 1)'} borderRadius={'lg'}>
-                            <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Vazio</Heading>
-                        </Center>
-                    )
-                    
-                case 'LOW':
-                    return (
-                        <Center px={'3'} h={'1.75rem'} bg={'hsla(42, 98%, 53%, 1)'} borderRadius={'lg'}>
-                            <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Abaixo do meio</Heading>
-                        </Center>
-                    )
-    
-                case 'MIDDLE':
-                    return (
-                        <Center px={'3'} h={'1.75rem'} bg={'hsla(57, 100%, 39%, 0.9)'} borderRadius={'lg'}>
-                            <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Pelo meio</Heading>
-                        </Center>
-                    )
-    
-                case 'ALMOST_FULL':
-                    return (
-                        <Center px={'3'} h={'1.75rem'} bg={' hsla(69, 67%, 51%, 1)'} borderRadius={'lg'}>
-                            <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Acima do meio</Heading>
-                        </Center>
-                    )
-    
-                case 'FULL':
-                    return (
-                        <Center px={'3'} h={'1.75rem'} bg={'hsla(149, 100%, 33%, 0.8)'} borderRadius={'lg'}>
-                            <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Cheio</Heading>
-                        </Center>
-                    )
-    
-                default:
-                    return <></>
+    const group = getRootProps()
 
-            }
-        } else {
-            return(
-                <Flex wrap={'wrap'} rowGap={'0.75rem'} columnGap={'0.9375rem'}>
-                    <Center px={'3'} h={'1.75rem'} bg={'hsla(149, 100%, 33%, 0.8)'} borderRadius={'lg'}>
-                        <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Cheio</Heading>
-                    </Center>
-                    <Center px={'3'} h={'1.75rem'} bg={' hsla(69, 67%, 51%, 1)'} borderRadius={'lg'}>
-                        <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Acima do meio</Heading>
-                    </Center>
-                    <Center px={'3'} h={'1.75rem'} bg={'hsla(57, 100%, 39%, 0.9)'} borderRadius={'lg'}>
-                        <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Pelo meio</Heading>
-                    </Center>
-                    <Center px={'3'} h={'1.75rem'} bg={'hsla(42, 98%, 53%, 1)'} borderRadius={'lg'}>
-                        <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Abaixo do meio</Heading>
-                    </Center>
-                    <Center px={'3'} h={'1.75rem'} bg={'hsla(358, 85%, 52%, 1)'} borderRadius={'lg'}>
-                        <Heading textTransform={'uppercase'} fontWeight={'semibold'} fontSize={'0.9375rem'} color={'white'}>Vazio</Heading>
-                    </Center>
-                </Flex>
+    return (
+        <Flex {...group} wrap={'wrap'} rowGap={'0.75rem'} columnGap={'0.9375rem'}>
+        {options.map((value) => {
+            const radio = getRadioProps({ value })
+            return (
+                <RadioCard key={value} {...radio} level={level}>
+                    {value}
+                </RadioCard>
             )
-        }
-    }
+        })}
+        </Flex>
+    )
 }
+
+// 1. Create a component that consumes the `useRadio` hook
+function RadioCard(props: any) {
+    const { getInputProps, getCheckboxProps } = useRadio(props)
+  
+    const input = getInputProps()
+    const checkbox = getCheckboxProps()
+
+    let bgColor = '#F9FAFA'
+    let textColor = 'rgba(69, 84, 71, 0.5)'
+
+    switch (props.level) {
+        case 'FULL':
+          if ('CHEIO' === props.children) {
+            bgColor = 'rgba(0, 166, 81, 0.8)'
+            textColor = '#FFFFFF'
+
+          } 
+
+          break;
+        
+        case 'ALMOST_FULL':
+          if ('ACIMA DO MEIO' === props.children) {
+              bgColor = '#BED62F'
+              textColor = '#FFFFFF'
+          }
+            
+        break;
+        
+        case 'MIDDLE':
+          if ('PELO MEIO' === props.children) {
+            bgColor = '#C7BD00'
+            textColor = '#FFFFFF'
+          }
+            
+        break;
+        
+        case 'LOW':
+          if ('ABAIXO DO MEIO' === props.children) {
+            bgColor = '#FDB813'
+            textColor = '#FFFFFF'
+          }
+            
+        break;
+        
+        case 'EMPTY':
+          if ('VAZIO' === props.children) {
+            bgColor = '#ED1C24'
+            textColor = '#FFFFFF'
+          }
+          
+        break;
+           
+    
+        default:
+            break;
+    }
+  
+    return (
+      <Box as='label'>
+        <input {...input} />
+        <Center
+          {...checkbox}
+          px='3'
+          py='0.25rem'
+          borderRadius={'lg'}
+          bg={bgColor}
+          cursor='pointer'
+
+          borderWidth={'1px'}
+          borderColor={'rgba(69, 84, 71, 0.5)'}
+          
+          _checked={{
+            bg: bgColor,
+            borderColor: 'teal.600',
+          }}
+          _focus={{
+            boxShadow: 'outline',
+          }}
+        >
+          <Heading 
+            color={textColor}
+            textTransform={'uppercase'}
+            fontSize={'1rem'}
+            fontWeight='semibold'
+          >
+            {props.children}
+          </Heading>
+        </Center>
+      </Box>
+    )
+  }
