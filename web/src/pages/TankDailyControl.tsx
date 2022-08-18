@@ -4,7 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { Header } from "../components/Header";
 import { Tanks } from "../components/Tanks";
 import { api } from "../services/api";
-import { Tank } from "./Home";
+import { Tank } from "../types";
 
 export function TankDailyControl() {
     const [tanks, setTanks] = useState<Tank[]>([])
@@ -12,9 +12,9 @@ export function TankDailyControl() {
 
     useEffect(() => {
         async function loadData() {
-            const response = await api.get('/tanks')
-            setTanks(response.data)
-            setTanksFilter(response.data)
+            const { data } = await api.get<Tank[]>('/tanks')
+            setTanks(data)
+            setTanksFilter(data)
         }
 
         loadData()
@@ -64,9 +64,7 @@ export function TankDailyControl() {
                 </Flex>
             ) : (
                 <Tanks tanks={tanksFilter} />
-            )} 
-
-                         
+            )}                 
 
         </Container>
         </>

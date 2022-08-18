@@ -25,7 +25,8 @@ export function makeServer() {
             hydrometer: Model.extend({
                 readings: hasMany(),
             }),
-            tank: Model
+            tank: Model,
+            dailyControl: Model
         },
 
         routes() {
@@ -44,8 +45,6 @@ export function makeServer() {
 
                 const hydrometer = schema.db.hydrometers.find(id)
                 const consume = (attrs.reading - hydrometer.display)
-
-                const updatedAt = timestamp
 
                 const newReadingData = {
                     createdAt: timestamp,
@@ -66,6 +65,32 @@ export function makeServer() {
             this.get('/tanks', (schema, request) => {
               return schema.db.tanks;
             });
+            this.post(`/tanks/:id/daily-controls`, (schema, request) => {
+              let tankId = request.params.id
+              const data = JSON.parse(request.requestBody)
+
+              const newDailyControl = {
+                createdAt: new Date(),
+                registerStatus: data.dailyControlData.registerStatus,
+                waterLevel: data.dailyControlData.waterLevel
+              }
+
+              let tank = schema.db.tanks.find(tankId)
+              tank = {
+                ...tank,
+                lastDailyControl: {
+                  createdAt: newDailyControl.createdAt,
+                  registerStatus: newDailyControl.registerStatus,
+                  waterLevel: newDailyControl.waterLevel
+                }
+              }
+
+              schema.db.tanks.update(tankId, {...tank})
+
+              console.log({tankId, newDailyControl})
+
+              return schema.db.dailyControls.insert(newDailyControl)
+            });
 
             this.namespace = ''
             this.passthrough()
@@ -82,8 +107,9 @@ export function makeServer() {
                 }
               ],
       
-              readings: [
-              ],
+              readings: [],
+
+              dailyControls: [],
 
               tanks: [
                   {
@@ -91,7 +117,7 @@ export function makeServer() {
                     name: 'Tanque azul - Residência',
                     description: '',
                     lastDailyControl: {
-                      date: '2022-07-28T15:17:00',
+                      createdAt: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'FULL'
                     }                
@@ -101,7 +127,7 @@ export function makeServer() {
                     name: 'Portaria',
                     description: '',
                     lastDailyControl: {
-                      date: '2022-07-28T15:17:00',
+                      createdAt: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'ALMOST_FULL'
                     }                
@@ -111,7 +137,7 @@ export function makeServer() {
                     name: 'Aviário',
                     description: '',
                     lastDailyControl: {
-                      date: '2022-07-28T15:17:00',
+                      createdAt: '2022-07-28T15:17:00',
                       registerStatus: false,
                       waterLevel: 'MIDDLE'
                     }                    
@@ -121,7 +147,7 @@ export function makeServer() {
                     name: 'Sabotagem',
                     description: '',
                     lastDailyControl: {
-                      date: '2022-07-28T15:17:00',
+                      createdAt: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'LOW'
                     } 
@@ -131,7 +157,7 @@ export function makeServer() {
                     name: 'Tanque azul - Horta',
                     description: '',
                     lastDailyControl: {
-                      date: '2022-07-28T15:17:00',
+                      createdAt: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'EMPTY'
                     } 
@@ -141,7 +167,7 @@ export function makeServer() {
                     name: 'Tanque azul - Suíno',
                     description: '',
                     lastDailyControl: {
-                      date: '2022-07-28T15:17:00',
+                      createdAt: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'FULL'
                     } 

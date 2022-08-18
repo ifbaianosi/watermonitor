@@ -1,15 +1,15 @@
-import { Box, Button, Center, Flex, Heading, Text } from "@chakra-ui/react";
+import { Center, Heading } from "@chakra-ui/react";
 import { RegisterStatusRadioGroup } from "./RegisterStatusRadioGroup";
 
 interface RegisterStatusProps {
     status: boolean;
-    readOnly?: boolean;
+    readOnly?: boolean;    
+    onChangeStatus: (registerStatus: boolean) => void;
 }
 
-export function RegisterStatus({ status, readOnly=false }: RegisterStatusProps) {
+export function RegisterStatus({ status, readOnly=false, onChangeStatus }: RegisterStatusProps) {
 
     const registerStatus = status ? 'ABERTO' : 'FECHADO';
-    console.log("readOnly: "+ readOnly);
 
     return(
         readOnly ? (
@@ -23,7 +23,7 @@ export function RegisterStatus({ status, readOnly=false }: RegisterStatusProps) 
                 </Center>
             )
         ) : (
-            <RegisterStatusRadioGroup isOpen={status} />
+            <RegisterStatusRadioGroup onChangeStatus={onChangeStatus} isOpen={status} />
         )
     )
 }

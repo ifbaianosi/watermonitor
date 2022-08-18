@@ -1,20 +1,35 @@
 import { HStack, useRadioGroup } from "@chakra-ui/react";
 import { RadioButton } from "./RadioButton";
 
-export const options = ['ABERTO', 'FECHADO']
+const options = ['ABERTO', 'FECHADO']
 
 interface RegisterStatusRadioGroupProps {
   isOpen: boolean;
+  onChangeStatus: (status: boolean) => void;
 }
 
-export function RegisterStatusRadioGroup({isOpen}: RegisterStatusRadioGroupProps) {
+export function RegisterStatusRadioGroup({isOpen, onChangeStatus}: RegisterStatusRadioGroupProps) {
 
   const defaultValue = isOpen ? 'ABERTO' : 'FECHADO'
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     defaultValue: defaultValue,
-    onChange: console.log,
+    onChange: handleChangeRegisterStatus,
   })
+
+  function handleChangeRegisterStatus(value: string) {
+    const status = registerIsOpen(value)
+    onChangeStatus(status)
+  }
+
+  function registerIsOpen(value: string) {
+    if ('ABERTO' === value) {
+      return true
+
+    } 
+    
+    return false
+  }
 
   const group = getRootProps()
   

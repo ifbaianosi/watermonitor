@@ -1,6 +1,5 @@
-import { Button as ChakraButton, Icon, ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
-import { ReactElement, ReactNode } from "react";
-import { FiCheck } from "react-icons/fi";
+import { Button as ChakraButton, ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
 interface ButtonProps extends ChakraButtonProps {
     children: ReactNode;

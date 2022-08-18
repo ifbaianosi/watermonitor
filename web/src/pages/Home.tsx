@@ -6,17 +6,7 @@ import { Header } from '../components/Header';
 import { useEffect, useState } from 'react';
 import { api } from '../services/api';
 import { Tanks } from '../components/Tanks';
-
-export interface Tank {
-    id: number;
-    name: string;
-    description: string;    
-    lastDailyControl: {
-        date: string,
-        registerStatus: boolean,
-        waterLevel: string
-    } | null
-}
+import { Tank } from '../types';
 
 export function Home() {
 

@@ -1,10 +1,10 @@
 import { Box, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { RegisterStatus } from "./RegisterStatus";
-import { WaterLevel } from "./WaterLevel";
+import { WaterLevel } from "../WaterLevel";
 
 import registrationStatusImg from '../../assets/registration-status.svg'
 import waterLevelImg from '../../assets/water-level.svg'
-import { Tank } from "../../pages/Home";
+import { Tank } from "../../types";
 
 interface TankCardProps {
     tank: Tank;

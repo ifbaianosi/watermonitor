@@ -1,9 +1,9 @@
 import { Flex } from "@chakra-ui/react";
-import { Tank } from "../../pages/Home";
+import { Tank } from "../../types";
 import { TankCard } from "../TankCard";
 import { TankDailyControlForm } from "../TankCard/TankDailyControlForm";
 
-export type TanksCardType = 'READ_ONLY' | 'WRITING';
+type TanksCardType = 'READ_ONLY' | 'WRITING';
 
 interface TanksProps {
     tanks: Tank[];
