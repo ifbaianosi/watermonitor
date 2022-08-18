@@ -46,7 +46,7 @@ export function TankDailyControl() {
                         border={'1px'} 
                         borderColor={'stroke'} 
                         boxShadow='md' 
-                        // onChange={(e) => handleFilterTank(e.target.value)}
+                        onChange={(e) => handleFilterTank(e.target.value)}
                     />
                     <InputRightElement
                         mt={'1'}

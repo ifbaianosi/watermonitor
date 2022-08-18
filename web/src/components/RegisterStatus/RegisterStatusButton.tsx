@@ -1,6 +1,6 @@
 import { Center, Flex, useRadio } from "@chakra-ui/react";
 
-export function RadioButton(props: any) {
+export function RegisterStatusButton(props: any) {
     const { getInputProps, getCheckboxProps } = useRadio(props)
 
     const input = getInputProps()

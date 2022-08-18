@@ -3,10 +3,10 @@ export interface Tank {
   name: string;
   description: string;    
   lastDailyControl: {
-      createdAt: string,
-      registerStatus: boolean,
-      waterLevel: WaterLevelType
-  } | null
+    date: string,
+    registerStatus: boolean,
+    waterLevel: WaterLevelType
+  } /* | null */
 }
 
 export const waterLevelOptions = {

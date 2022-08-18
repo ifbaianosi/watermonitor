@@ -1,5 +1,4 @@
 import { createServer, Model, belongsTo, hasMany } from 'miragejs'
-import { RegisterStatus } from '../../components/TankCard/RegisterStatus';
 
 // type Hydrometer = {
 //     id: number;
@@ -117,7 +116,7 @@ export function makeServer() {
                     name: 'Tanque azul - Residência',
                     description: '',
                     lastDailyControl: {
-                      createdAt: '2022-07-28T15:17:00',
+                      date: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'FULL'
                     }                
@@ -127,7 +126,7 @@ export function makeServer() {
                     name: 'Portaria',
                     description: '',
                     lastDailyControl: {
-                      createdAt: '2022-07-28T15:17:00',
+                      date: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'ALMOST_FULL'
                     }                
@@ -137,7 +136,7 @@ export function makeServer() {
                     name: 'Aviário',
                     description: '',
                     lastDailyControl: {
-                      createdAt: '2022-07-28T15:17:00',
+                      date: '2022-07-28T15:17:00',
                       registerStatus: false,
                       waterLevel: 'MIDDLE'
                     }                    
@@ -147,7 +146,7 @@ export function makeServer() {
                     name: 'Sabotagem',
                     description: '',
                     lastDailyControl: {
-                      createdAt: '2022-07-28T15:17:00',
+                      date: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'LOW'
                     } 
@@ -157,7 +156,7 @@ export function makeServer() {
                     name: 'Tanque azul - Horta',
                     description: '',
                     lastDailyControl: {
-                      createdAt: '2022-07-28T15:17:00',
+                      date: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'EMPTY'
                     } 
@@ -167,7 +166,7 @@ export function makeServer() {
                     name: 'Tanque azul - Suíno',
                     description: '',
                     lastDailyControl: {
-                      createdAt: '2022-07-28T15:17:00',
+                      date: '2022-07-28T15:17:00',
                       registerStatus: true,
                       waterLevel: 'FULL'
                     } 
