@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { Tank } from "../../types";
 import { TankCard } from "../TankCard";
-import { TankDailyControlForm } from "../TankCard/TankDailyControlForm";
+import { TankDailyControlForm } from "../TankDailyControlForm";
 
 type TanksCardType = 'READ_ONLY' | 'WRITING';
 
@@ -30,7 +30,7 @@ export function Tanks( { tanks, type = 'WRITING' }: TanksProps) {
     } 
 
     return(
-        <Flex mt='12' gap='8' flexWrap='wrap' justify={['center', 'center', 'flex-start']}>
+        <Flex mt='12' mb={'4rem'} gap='8' flexWrap='wrap' justify={['center', 'center', 'flex-start']}>
             {tanks.map(tank => {
                 return (cardTypeComponent(tank))
             })}

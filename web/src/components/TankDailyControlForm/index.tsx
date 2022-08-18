@@ -1,10 +1,7 @@
-import { Box, Flex, Heading, HStack, Icon, Image, Stack, Text } from "@chakra-ui/react";
-import { RegisterStatus } from "./RegisterStatus";
+import { Box, Flex, Heading, HStack, Image, Stack, Text } from "@chakra-ui/react";
 
 import registerStatusImg from '../../assets/registration-status.svg'
 import waterLevelImg from '../../assets/water-level.svg'
-
-import { FiChevronRight } from "react-icons/fi";
 
 import { Tank, DailyControlInput, WaterLevelType, DailyControl } from "../../types";
 import { WaterLevel } from "../WaterLevel";
@@ -12,6 +9,7 @@ import { useState } from "react";
 import { Button } from "../shared/Button";
 import { api } from "../../services/api";
 import { formatDateTime } from "../../utils/format";
+import { RegisterStatus } from "../RegisterStatus";
 
 const REGISTER_STATUS_DEFAULT_VALUE = false
 
@@ -20,9 +18,22 @@ interface TankCardProps {
 }
 
 export function TankDailyControlForm({ tank }: TankCardProps) {
+
+    let tankDailyControl = null
+
+    if (tank.lastDailyControl) {
+        tankDailyControl = {
+            createdAt: tank.lastDailyControl.date,
+            registerStatus: tank.lastDailyControl.registerStatus,
+            waterLevel: tank.lastDailyControl.waterLevel
+        }
+    }
+
+    const [lastDailyControl, setLastDailyControl] = useState<DailyControl | null>(tankDailyControl)
+
     let [isSubmiting, setIsSubmiting] = useState(false);
 
-    const [lastDailyControl, setLastDailyControl] = useState<DailyControl | null>(tank.lastDailyControl)
+
     const [tankDailyControlInput, setTankDailyControlInput] = useState<DailyControlInput>({
         tankId: tank.id,
         registerStatus: tank.lastDailyControl ? tank.lastDailyControl.registerStatus : false,
@@ -53,13 +64,10 @@ export function TankDailyControlForm({ tank }: TankCardProps) {
         setIsSubmiting(true)
 
         const tankId = tankDailyControlInput.tankId
-        const dailyControlData = {
-            registerStatus: tankDailyControlInput.registerStatus,
-            waterLevel: tankDailyControlInput.waterLevel
-        }
 
         const response = await api.post(`/tanks/${tankId}/daily-controls`, {
-            dailyControlData
+            registerStatus: tankDailyControlInput.registerStatus,
+            waterLevel: tankDailyControlInput.waterLevel
         })
 
         setLastDailyControl(response.data)
@@ -67,7 +75,7 @@ export function TankDailyControlForm({ tank }: TankCardProps) {
     }
 
     return(
-        <Box borderRadius={'lg'} bg={'white'} w='22rem' /* h={'558px'} */ pt='12' px='8' boxShadow='md' border='1px' borderColor='stroke' >
+        <Box borderRadius={'lg'} bg={'white'} w='22rem' pt='12' px='8' boxShadow='md' border='1px' borderColor='stroke' >
             <Stack spacing='1'>
                 <Text>Reservatório</Text>
                 <Heading fontSize='xl' fontWeight='semibold' textTransform={'uppercase'}>{tank.name}</Heading>
