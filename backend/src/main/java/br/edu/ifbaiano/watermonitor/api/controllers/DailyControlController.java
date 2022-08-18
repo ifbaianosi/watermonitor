@@ -21,13 +21,14 @@ import br.edu.ifbaiano.watermonitor.domain.service.DailyControlService;
 public class DailyControlController {
 
 	@Autowired
-	private DailyControlService DailyControlService;
+	private DailyControlService dailyControlService;
 	
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public DailyControl create(@Valid @PathVariable Long tankId, @RequestBody DailyControl dailyControl) {
-		return DailyControlService.save(dailyControl, tankId);
+		
+		return dailyControlService.save(dailyControl, tankId);
 	
 	}
 	

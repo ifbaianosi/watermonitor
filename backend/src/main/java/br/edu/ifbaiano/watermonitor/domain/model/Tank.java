@@ -1,6 +1,5 @@
 package br.edu.ifbaiano.watermonitor.domain.model;
 
-import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -74,15 +73,15 @@ public class Tank {
 		return Objects.equals(id, other.id);
 	}
 
-	public void updateLastDailyControl(DailyControl DailyControl) {
+	public void updateLastDailyControl(DailyControl dailyControl) {
 		if(getLastDailyControl()== null) {
 			this.setLastDailyControl(new LastDailyControl());
 
 		}
 		
-		getLastDailyControl().setDate(OffsetDateTime.now());
-		getLastDailyControl().setLevel(DailyControl.getWaterLevel());
-		getLastDailyControl().setRegisterStatus(DailyControl.getRegisterStatus());			
+		getLastDailyControl().setDate(dailyControl.getCreatedAt());
+		getLastDailyControl().setLevel(dailyControl.getWaterLevel());
+		getLastDailyControl().setRegisterStatus(dailyControl.getRegisterStatus());			
 	}
 
 }

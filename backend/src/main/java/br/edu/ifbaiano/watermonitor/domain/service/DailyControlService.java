@@ -1,39 +1,65 @@
 package br.edu.ifbaiano.watermonitor.domain.service;
 
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifbaiano.watermonitor.domain.model.Tank;
 import br.edu.ifbaiano.watermonitor.domain.model.DailyControl;
+import br.edu.ifbaiano.watermonitor.domain.model.Tank;
 import br.edu.ifbaiano.watermonitor.domain.repository.DailyControlRepository;
 
 @Service
 public class DailyControlService {
 
 	@Autowired
-	private DailyControlRepository tankLevelRepository;
+	private DailyControlRepository dailyControlRepository;
 
 	@Autowired
 	private TankService tankService;
 
 	@Transactional
 	public DailyControl save(DailyControl dailyControl, Long tankId) {
-		Tank tank = tankService.findOrFail(tankId);		
-
+		Tank tank = tankService.findOrFail(tankId);
+		
 		dailyControl.setTank(tank);
+		dailyControl.setCreatedAt(OffsetDateTime.now().plusDays(2));
 		
-		DailyControl dailyControlSaved = tankLevelRepository.save(dailyControl);
+		List<DailyControl> dailyControls = dailyControlRepository.findAllByTankId(tankId);
 		
-		tank.updateLastDailyControl(dailyControlSaved);
+		List<DailyControl> test = dailyControls.stream().filter(
+				date -> date.getCreatedAt().toLocalDate().equals(dailyControl.getCreatedAt().toLocalDate()))
+				.collect(Collectors.toList());
 		
-		return dailyControlSaved;
+		if(test.size()>0) {
+			DailyControl updatedDailyControl = test.get(0);
+			updatedDailyControl.setCreatedAt(dailyControl.getCreatedAt());
+			updatedDailyControl.setRegisterStatus(dailyControl.getRegisterStatus());
+			updatedDailyControl.setWaterLevel(dailyControl.getWaterLevel());
+			
+			
+			DailyControl dailyControlSaved = dailyControlRepository.save(updatedDailyControl);
+			
+			tank.updateLastDailyControl(dailyControlSaved);
+			
+			return dailyControlSaved;
+		}else {
+			DailyControl dailyControlSaved = dailyControlRepository.save(dailyControl);
+			
+			tank.updateLastDailyControl(dailyControlSaved);
+			
+			return dailyControlSaved;
+			
+		}		
 		
 	}
 
 	public DailyControl findOrFail(Long tankLevelId) {
-		return tankLevelRepository.findById(tankLevelId)
+		return dailyControlRepository.findById(tankLevelId)
 				.orElseThrow();
 	}
 }

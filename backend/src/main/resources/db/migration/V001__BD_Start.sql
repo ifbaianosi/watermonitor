@@ -36,7 +36,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `watermonitor`.`daily_control` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `created_at` DATE NOT NULL,
+  `created_at` DATETIME NOT NULL,
   `water_level` VARCHAR(45) NULL,
   `register_status` TINYINT NULL,
   `tank_id` BIGINT(60) NOT NULL,
