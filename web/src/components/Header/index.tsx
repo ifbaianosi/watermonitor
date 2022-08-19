@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { Box, Flex, Icon, IconButton, Text, Image } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { FiArrowLeft } from 'react-icons/fi'
-import { useNavigate } from 'react-router-dom'
 
 import logoImg from '../../assets/logo.svg'
 
@@ -26,6 +25,7 @@ export function Header({title, navigateTo, children}: HeaderProps) {
                 {children && children}
 
                 { navigateTo && <IconButton onClick={() => navigate(navigateTo)} aria-label="Voltar para a página anterior" bg={'white'} borderWidth={1} borderColor={'stroke'} icon={<Icon as={FiArrowLeft}  />} />} 
+                                  
             </Flex>
         </Box>
     );
