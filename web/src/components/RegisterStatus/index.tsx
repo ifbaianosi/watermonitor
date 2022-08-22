@@ -35,11 +35,11 @@ export function RegisterStatus({status, readOnly=false, onChangeStatus}: Registe
     const readOnlyButton = (registerStatus: boolean) => {
         return (
             registerStatus ? (
-                <Center  w='8.0625rem' h='2.625rem' bg={'green.100'} borderRadius={'base'} border='1px' borderColor="green.500" >
+                <Center  w='8.0625rem' h='2.625rem' bg={'registerStatusOpen'} borderRadius={'base'} border='1px' borderColor="green.500" >
                     <Heading fontWeight={'semibold'} fontSize={'md'} color='green.500'>ABERTO</Heading>
                 </Center>
             ) : (
-                <Center  w='8.0625rem' h='2.625rem' bg={'redAlpha200'} borderRadius={'base'} border='1px' borderColor="red" >
+                <Center  w='8.0625rem' h='2.625rem' bg={'registerStatusClosed'} borderRadius={'base'} border='1px' borderColor="red" >
                     <Heading fontWeight={'semibold'} fontSize={'md'} color='red'>FECHADO</Heading>
                 </Center>
             )
@@ -48,7 +48,7 @@ export function RegisterStatus({status, readOnly=false, onChangeStatus}: Registe
 
     const registerStatusRadioButtons = () => {
         return (
-            <HStack h='3.125rem' gap={'0.25rem'} {...group} bg='#F9FAFA' borderColor={'#E6E6E6'} borderWidth='1px' p='0.25rem' borderRadius={'base'}>
+            <HStack h='3.125rem' gap={'0.25rem'} {...group} bg='background' p='0.25rem' borderRadius={'base'} border={'1px'} borderColor={'cardBorderColor'}>
                 {options.map(value => {
                     const radio = getRadioProps({value})
                     return(

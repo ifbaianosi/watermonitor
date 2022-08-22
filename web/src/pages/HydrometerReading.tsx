@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { Box, Container, FormControl, Stack, Text, useDisclosure, useToast, VStack, HStack, TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, Flex, Alert, AlertIcon, Icon, FormErrorMessage } from "@chakra-ui/react";
 import { Skeleton } from '@chakra-ui/react'
 
@@ -72,25 +72,25 @@ export function HydrometerReading() {
     }, [readingIsAlreadyDone])
 
     return(
-        <>        
+        <React.Fragment>        
         <Stack>
             <Header navigateTo="/" title="LEITURA DO HIDRÔMETRO" />
 
             <VStack as="main" >
                 <Container maxW="1120px">                
-                    <Box marginTop='16' w={'544px'} mx='auto' bg={'white'} p={'8'} rounded='lg' boxShadow='md' borderWidth={'1px'} borderColor={'stroke'}>                    
+                    <Box marginTop='16' w={'544px'} mx='auto' bg={'card'} p={'8'} rounded='lg' boxShadow='md' borderWidth={'1px'} borderColor={'cardBorderColor'}>                    
                         <Stack spacing={6}>
                             <Stack spacing={1}>
                                 <Skeleton w={'200px'} isLoaded={!!hydrometer} >
                                     <Text  >Número do hidrômetro</Text>   
-                                    <Text fontWeight={'semibold'}>{hydrometer?.number}</Text>
+                                    <Text fontWeight={'semibold'} color={'title'}>{hydrometer?.number}</Text>
                                 </Skeleton>
                             </Stack>
 
                             <Stack spacing={1}>
                                 <Skeleton w={'200px'} isLoaded={!!hydrometer} >
                                     <Text w={'100%'}>Última leitura</Text>
-                                    <Text w={'100%'} fontWeight={'semibold'}>{hydrometer?.updatedAt}</Text>
+                                    <Text w={'100%'} fontWeight={'semibold'} color={'title'}>{hydrometer?.updatedAt}</Text>
                                 </Skeleton>
                             </Stack>
 
@@ -146,7 +146,7 @@ export function HydrometerReading() {
                 }
             }
         />
-    </>
+    </React.Fragment>
     );    
 
     function showToast() {

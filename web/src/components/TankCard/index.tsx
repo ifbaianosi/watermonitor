@@ -5,6 +5,7 @@ import registrationStatusImg from '../../assets/registration-status.svg'
 import waterLevelImg from '../../assets/water-level.svg'
 import { Tank } from "../../types";
 import { RegisterStatus } from "../RegisterStatus";
+import { Icon } from "../shared/Icon";
 
 interface TankCardProps {
     tank: Tank;
@@ -12,16 +13,17 @@ interface TankCardProps {
 
 export function TankCard( { tank }: TankCardProps ) {
     return(
-        <Box borderRadius={'lg'} bg={'white'} w='22rem' pt='12' pb='10' px='8' boxShadow='md' border='1px' borderColor='stroke' >
+        <Box borderRadius={'lg'} bg={'card'} w='22rem' pt='12' pb='10' px='8' boxShadow='md' border='1px' borderColor='cardBorderColor' >
             <Stack spacing='1'>
                 <Text>Reservatório</Text>
-                <Heading fontSize='xl' fontWeight='semibold' textTransform={'uppercase'}>{tank.name}</Heading>
+                <Heading color={'title'} fontSize='xl' fontWeight='semibold' textTransform={'uppercase'}>{tank.name}</Heading>
             </Stack>
             <Flex mt='8' gap='2' align={'flex-start'}>
-                <Image
+                {/* <Image
                     src={registrationStatusImg}
                     alt='Situação do registro'
-                />
+                /> */}
+                <Icon iconName="REGISTER_STATUS" />
                 <Stack gap={'0.5rem'}>
                     <Text>Situaçao do resgistro</Text>
                     {tank.lastDailyControl ? (
@@ -33,10 +35,11 @@ export function TankCard( { tank }: TankCardProps ) {
                 </Stack>
             </Flex>
             <Flex mt='6' gap='2'>
-                <Image
+                {/* <Image
                     src={waterLevelImg}
                     alt='Nível da água'
-                />
+                /> */}
+                <Icon iconName="WATER_LEVEL" />
                 <Stack>
                     <Text>Nível da água</Text>
                     {tank.lastDailyControl ? (

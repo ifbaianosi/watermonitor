@@ -13,40 +13,40 @@ export const waterLevelOptions = {
     FULL: {
       description: 'Cheio',
       selected: {
-        bgColor: 'rgba(0, 166, 81, 0.8)',
-        color: '#FFFFFF'
+        bgColor: 'full',
+        color: 'waterLevelTextSelected'
       }
     },
   
     ALMOST_FULL: {
       description: 'Acima do meio',
       selected: {
-        bgColor: '#BED62F',
-        color: '#FFFFFF'
+        bgColor: 'almost_full',
+        color: 'waterLevelTextSelected'
       }
     },
   
     MIDDLE: {
       description: 'Pelo meio',
       selected: {
-        bgColor: '#C7BD00',
-        color: '#FFFFFF'
+        bgColor: 'middle',
+        color: 'waterLevelTextSelected'
       }
     },
   
     LOW: {
       description: 'Abaixo do meio',
       selected: {
-        bgColor: '#FDB813',
-        color: '#FFFFFF'
+        bgColor: 'low',
+        color: 'waterLevelTextSelected'
       }
     },
   
     EMPTY: {
       description: 'Vazio',
       selected: {
-        bgColor: '#ED1C24',
-        color: '#FFFFFF'
+        bgColor: 'empty',
+        color: 'waterLevelTextSelected'
       }
     }
 }

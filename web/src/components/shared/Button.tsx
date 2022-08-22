@@ -5,10 +5,18 @@ interface ButtonProps extends ChakraButtonProps {
     children: ReactNode;
 }
 
-export function Button( { /* onSubmit ,*/ children, ...rest }: ButtonProps) {
+export function Button({ children, ...rest }: ButtonProps) {
     return(
-        <ChakraButton /*  onClick={onSubmit} */ {...rest} loadingText='Aguarde...' h={'12'} bg={'brand.blue'} textColor={'white'} fontSize="15px" _hover={{opacity: '0.8'}}>
-            
+        <ChakraButton 
+            {...rest} 
+            loadingText='Aguarde...' 
+            h={'12'} 
+            bg={'primary'} 
+            textColor={'background'} 
+            fontSize="0.9375rem"
+            fontFamily={'heading'}
+            _hover={{bg: 'primary', filter: 'brightness(0.8)'}}
+        >
             { children }
         </ChakraButton>
     )

@@ -19,8 +19,8 @@ export function Modal( {isOpen, onClose, headerTitle, children}: ModalProps) {
     return (
         <ChakraModal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>{ headerTitle }</ModalHeader>
+            <ModalContent bg={'card'}>
+                <ModalHeader color={'title'}>{ headerTitle }</ModalHeader>
                 <ModalCloseButton />
                 { children }
             </ModalContent>

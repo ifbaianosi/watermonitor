@@ -10,6 +10,7 @@ import { Button } from "../shared/Button";
 import { api } from "../../services/api";
 import { formatDateTime } from "../../utils/format";
 import { RegisterStatus } from "../RegisterStatus";
+import { Icon } from "../shared/Icon";
 
 const REGISTER_STATUS_DEFAULT_VALUE = false
 
@@ -75,39 +76,41 @@ export function TankDailyControlForm({ tank }: TankCardProps) {
     }
 
     return(
-        <Box borderRadius={'lg'} bg={'white'} w='22rem' pt='12' px='8' boxShadow='md' border='1px' borderColor='stroke' >
+        <Box borderRadius={'lg'} bg={'card'} w='22rem' pt='12' px='6' boxShadow='md' border='1px' borderColor='cardBorderColor' >
             <Stack spacing='1'>
                 <Text>Reservatório</Text>
-                <Heading fontSize='xl' fontWeight='semibold' textTransform={'uppercase'}>{tank.name}</Heading>
+                <Heading color={'title'} fontSize='xl' fontWeight='semibold' textTransform={'uppercase'}>{tank.name}</Heading>
             </Stack>
             <Stack mt='8' gap='0.5rem'>
                 <Flex gap={'0.25rem'}>
-                    <Image
+                    {/* <Image
                         src={registerStatusImg}
                         alt='Situação do registro'
-                    />
+                    /> */}
+                    <Icon iconName="REGISTER_STATUS" />
                     <Text>Situaçao do resgistro</Text>
                 </Flex>
                 <RegisterStatus onChangeStatus={handleChangeRegisterStatus} status={tank.lastDailyControl?.registerStatus || REGISTER_STATUS_DEFAULT_VALUE} />
             </Stack>
             <Stack mt='6' gap='2'>
                 <Flex align={'center'} gap={'0.5rem'}>
-                    <Image
+                    {/* <Image
                         src={waterLevelImg}
                         alt='Nível da água'
-                    />
+                    /> */}
+                    <Icon iconName="WATER_LEVEL" />
                     <Text>Nível da água</Text>    
                 </Flex>               
                 <WaterLevel onSelectLevel={handleChangeWaterLevel} tankId={tank.id} level={tank.lastDailyControl?.waterLevel || 'FULL'} />
             </Stack>
-            <HStack mt={'8'} justifyContent={'space-between'} bg={'#F4F5F5'} mx={'-8'} px={'8'} pt={'4'} pb={'5'} borderBottomRadius={'lg'} borderTop='1px' borderTopColor={'stroke'}>
+            <HStack mt={'8'} justifyContent={'space-between'} bg={'background'} mx={'-6'} px={'6'} pt={'4'} pb={'5'} borderBottomRadius={'lg'} borderTop='1px' borderTopColor={'cardBorderColor'}>
                 <Button isLoading={isSubmiting} onClick={handleSubmit}>
                     Salvar controle                    
                 </Button>
                 {lastDailyControl && (
                     <Stack textAlign={'right'} rowGap={'0.25rem'}>
                         <Text fontSize={'0.875rem'}>Último controle</Text>
-                        <Heading fontSize={'0.9375rem'}>{formatDateTime(new Date(lastDailyControl.createdAt))}</Heading>
+                        <Heading fontSize={'0.9375rem'} color={'title'}>{formatDateTime(new Date(lastDailyControl.createdAt))}</Heading>
                     </Stack>
                 )}
             </HStack>

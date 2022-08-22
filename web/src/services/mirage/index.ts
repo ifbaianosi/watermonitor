@@ -69,16 +69,16 @@ export function makeServer() {
               const data = JSON.parse(request.requestBody)
 
               const newDailyControl = {
-                createdAt: new Date(),
-                registerStatus: data.dailyControlData.registerStatus,
-                waterLevel: data.dailyControlData.waterLevel
+                createdAt: new Date().toString(),
+                registerStatus: data.registerStatus,
+                waterLevel: data.waterLevel
               }
 
               let tank = schema.db.tanks.find(tankId)
               tank = {
                 ...tank,
                 lastDailyControl: {
-                  createdAt: newDailyControl.createdAt,
+                  date: newDailyControl.createdAt,
                   registerStatus: newDailyControl.registerStatus,
                   waterLevel: newDailyControl.waterLevel
                 }

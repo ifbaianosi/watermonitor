@@ -16,19 +16,22 @@ export function RegisterStatusButton(props: any) {
                             {...checkbox} 
                             w='100%'                          
                             h='100%' 
-                            bg={'white'} 
+                            bg={'card'} 
                             borderRadius={'base'} 
                             textTransform='uppercase'
                             fontWeight={'semibold'}
                             cursor='pointer'
                             borderWidth='1px'
+                            _hover={{
+                                color: 'green.500'
+                            }}
                             _checked={{
-                            bg: 'green.100',
-                            color: 'green.500',
-                            borderColor: 'green.500',
+                                bg: 'registerStatusOpen',
+                                color: 'green.500',
+                                borderColor: 'registerStatusOpen'
                             }}
                             _focus={{
-                            boxShadow: 'outline',
+                                boxShadow: 'outline',
                             }}
                         >
                             {props.children}
@@ -44,19 +47,22 @@ export function RegisterStatusButton(props: any) {
                             {...checkbox}                            
                             w='100%'                          
                             h='100%'  
-                            bg={'white'} 
+                            bg={'card'} 
                             borderRadius={'base'} 
                             textTransform='uppercase'
                             fontWeight={'semibold'}
                             cursor='pointer'
                             borderWidth='1px'
+                            _hover={{
+                                color: 'danger'
+                            }}
                             _checked={{
-                            bg: 'redAlpha200',
-                            color: 'red',
-                            borderColor: 'red',
+                                bg: 'registerStatusClosed',
+                                color: 'danger',
+                                borderColor: 'registerStatusClosed'
                             }}
                             _focus={{
-                            boxShadow: 'outline',
+                                boxShadow: 'outline',
                             }}
                         >
                             {props.children}

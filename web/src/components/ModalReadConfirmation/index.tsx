@@ -28,15 +28,15 @@ export function ModalReadConfirmation({ isOpen = false, onClose, isSubmiting = f
                     <Tbody>
                         <Tr>
                             <Td>Leitura anterior</Td>
-                            <Td fontSize={'xl'} fontWeight={'medium'}>{ dataConfirmation.display }</Td>
+                            <Td fontSize={'xl'} fontWeight={'medium'} color={'title'}>{ dataConfirmation.display }</Td>
                         </Tr>
                         <Tr>
                             <Td>Leitura de hoje</Td>
-                            <Td fontSize={'xl'} fontWeight={'medium'}>{ dataConfirmation.reading }</Td>
+                            <Td fontSize={'xl'} fontWeight={'medium'} color={'title'}>{ dataConfirmation.reading }</Td>
                         </Tr>
                         <Tr>
                             <Td>Consumo</Td>
-                            <Td fontSize={'xl'} fontWeight={'medium'}>{ `${ dataConfirmation.consumo } ` }</Td>
+                            <Td fontSize={'xl'} fontWeight={'medium'} color={'title'}>{ `${ dataConfirmation.consumo } ` }</Td>
                         </Tr>
                     </Tbody>
                 </Table>
@@ -44,7 +44,7 @@ export function ModalReadConfirmation({ isOpen = false, onClose, isSubmiting = f
             </ModalBody>
 
             <ModalFooter justifyContent={'flex-start'}>
-                <Button bg={'brand.blue'} textColor={'white'} fontSize="15px" _hover={{opacity: '0.8'}} mr={3} isLoading={isSubmiting} onClick={onSubmit}>
+                <Button mr={3} isLoading={isSubmiting} onClick={onSubmit}>
                     Confirmar leitura
                 </Button>
                 <ChakraButton variant='ghost' h={'12'} onClick={onClose}>

@@ -16,15 +16,15 @@ export function WaterLevelButton(props: any) {
           px='3'
           py='0.25rem'
           borderRadius={'lg'}
-          bg={'#F9FAFA'}
+          bg={'background'}
           cursor='pointer'
 
           borderWidth={'1px'}
-          borderColor={'rgba(69, 84, 71, 0.5)'}
-          
+          borderColor={'cardBorderColor'}
+
           _checked={{
             bg: selectedBgColor,
-            // borderColor: 'teal.500',
+            borderColor: selectedBgColor,
           }}
           _focus={{
             boxShadow: 'outline',
@@ -35,7 +35,11 @@ export function WaterLevelButton(props: any) {
             color={ isChecked ? selectedColor : 'rgba(69, 84, 71, 0.5)'}
             textTransform={'uppercase'}
             fontSize={'1rem'}
-            fontWeight='semibold'
+            fontWeight='bold'
+          
+            _hover={{
+              color: isChecked ? selectedColor : selectedBgColor
+            }}
           >
             {children}
           </Heading>
