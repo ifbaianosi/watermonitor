@@ -27,16 +27,16 @@ public class DailyControlService {
 		Tank tank = tankService.findOrFail(tankId);
 		
 		dailyControl.setTank(tank);
-		dailyControl.setCreatedAt(OffsetDateTime.now().plusDays(2));
+		dailyControl.setCreatedAt(OffsetDateTime.now());
 		
 		List<DailyControl> dailyControls = dailyControlRepository.findAllByTankId(tankId);
 		
-		List<DailyControl> test = dailyControls.stream().filter(
+		List<DailyControl> isTheSameDate = dailyControls.stream().filter(
 				date -> date.getCreatedAt().toLocalDate().equals(dailyControl.getCreatedAt().toLocalDate()))
 				.collect(Collectors.toList());
 		
-		if(test.size()>0) {
-			DailyControl updatedDailyControl = test.get(0);
+		if(isTheSameDate.size()>0) {
+			DailyControl updatedDailyControl = isTheSameDate.get(0);
 			updatedDailyControl.setCreatedAt(dailyControl.getCreatedAt());
 			updatedDailyControl.setRegisterStatus(dailyControl.getRegisterStatus());
 			updatedDailyControl.setWaterLevel(dailyControl.getWaterLevel());
