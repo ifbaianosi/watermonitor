@@ -34,10 +34,10 @@ export function Home() {
                 <Flex justify={'space-between'} w={'100%'} align={'center'}>
                     <Flex justify={'center'} width={'100%'} gap={'10'}>
                         <Link to={'/dailycontrols'}>
-                            <ChakraLink fontSize={'0.875rem'}>CONTROLE DIÁRIO</ChakraLink>
+                            <ChakraLink fontSize={'0.875rem'} textDecoration={'none'} _hover={{color: 'title'}}>CONTROLE DIÁRIO</ChakraLink>
                         </Link>
                         <Link to={'/hydrometer'}>
-                            <ChakraLink fontSize={'0.875rem'}>LEITURA DO HIDRÔMETRO</ChakraLink>
+                            <ChakraLink fontSize={'0.875rem'} textDecoration={'none'} _hover={{color: 'title'}}>LEITURA DO HIDRÔMETRO</ChakraLink>
                         </Link>
                     </Flex>
                     <Flex align={'center'} color={'#fff'}>

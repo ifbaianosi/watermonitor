@@ -27,46 +27,52 @@ export function TankDailyControl() {
 
     return(
         <React.Fragment>
-            <Header navigateTo="/" title="CONTROLE DIÁRIO DOS RESERVATÓRIOS" />
+            <Stack>
 
-            <Container maxWidth={'1120px'} p={'0'} overflowX={'hidden'}>
-                <Flex mt='10' justify={['space-between']} direction={['column', 'row']} gap='5'>
-                    <Stack spacing={1}>
-                        <Text fontSize={'1.375rem'} fontWeight='bold' color={'title'} lineHeight={'1.625rem'}>{tanks.length}</Text>
-                        <Text fontSize={'0.9375rem'} fontWeight='medium'>Reservatórios</Text>
-                    </Stack>
-                    <InputGroup maxW={'22rem'}>
-                        <Input 
-                            type='search' 
-                            h='2.875rem' 
-                            placeholder='Pesquisar reservatório' 
-                            bg={'card'} 
-                            _hover={{bg: 'card'}}
-                            _focus={{bg: 'card'}}
-                            border={'1px'} 
-                            borderColor={'cardBorderColor'} 
-                            boxShadow='md' 
-                            onChange={(e) => handleFilterTank(e.target.value)}
-                        />
-                        <InputRightElement
-                            mt={'1'}
-                            pointerEvents='none'
-                            children={<FiSearch color='texts' size={'1.5rem'}/>}
-                        />
-                    </InputGroup>
-                </Flex>
-                
-                {tanksFilter.length == 0 ? (
-                    <Flex mt='12' gap='8' flexWrap='wrap' justify={['center', 'center', 'flex-start']}>
-                        <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
-                        <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
-                        <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
-                    </Flex>
-                ) : (
-                    <Tanks tanks={tanksFilter} />
-                )}                 
+                <Header navigateTo="/" title="CONTROLE DIÁRIO DOS RESERVATÓRIOS" />
 
-            </Container>
+                <Stack as="main">
+                    <Container maxWidth={'1120px'} px={'0'} >
+                        <Flex mt='10' justify={['space-between']} direction={['column', 'row']} gap='5'>
+                            <Stack spacing={1}>
+                                <Text fontSize={'1.375rem'} fontWeight='bold' color={'title'} lineHeight={'1.625rem'}>{tanks.length}</Text>
+                                <Text fontSize={'0.9375rem'} fontWeight='medium'>Reservatórios</Text>
+                            </Stack>
+                            <InputGroup maxW={'22rem'}>
+                                <Input 
+                                    type='search' 
+                                    h='2.875rem' 
+                                    placeholder='Pesquisar reservatório' 
+                                    bg={'card'} 
+                                    _hover={{bg: 'card'}}
+                                    _focus={{bg: 'card'}}
+                                    border={'1px'} 
+                                    borderColor={'cardBorderColor'} 
+                                    boxShadow='md' 
+                                    onChange={(e) => handleFilterTank(e.target.value)}
+                                />
+                                <InputRightElement
+                                    mt={'1'}
+                                    pointerEvents='none'
+                                    children={<FiSearch color='texts' size={'1.5rem'}/>}
+                                />
+                            </InputGroup>
+                        </Flex>
+                        
+                        {tanksFilter.length == 0 ? (
+                            <Flex mt='12' gap='8' flexWrap='wrap' justify={['center', 'center', 'flex-start']}>
+                                <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
+                                <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
+                                <Skeleton h={'558px'} w='22rem' borderRadius={'lg'} />
+                            </Flex>
+                        ) : (
+                            <Tanks tanks={tanksFilter} />
+                        )}                 
+
+                    </Container>
+
+                </Stack>
+            </Stack>
         </React.Fragment>
     )
 }

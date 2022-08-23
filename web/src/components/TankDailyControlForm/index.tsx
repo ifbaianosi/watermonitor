@@ -76,7 +76,7 @@ export function TankDailyControlForm({ tank }: TankCardProps) {
     }
 
     return(
-        <Box borderRadius={'lg'} bg={'card'} w='22rem' pt='12' px='6' boxShadow='md' border='1px' borderColor='cardBorderColor' >
+        <Box borderRadius={'lg'} bg={'card'} w={'22rem'} pt='12' px='6' boxShadow='md' border='1px' borderColor='cardBorderColor' >
             <Stack spacing='1'>
                 <Text>Reservatório</Text>
                 <Heading color={'title'} fontSize='xl' fontWeight='semibold' textTransform={'uppercase'}>{tank.name}</Heading>

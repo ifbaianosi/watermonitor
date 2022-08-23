@@ -49,6 +49,10 @@ const theme = extendTheme({
           default: 'hsla(358, 85%, 52%, 0.12)',
           _dark: 'hsla(358, 85%, 52%, 0.12)'
         },
+        waterLevelText: {
+          default: 'hsla(128, 10%, 30%, 0.5)',
+          _dark: 'hsla(128, 10%, 90%, 0.5)'
+        },
         waterLevelTextSelected: {
           default: '#FFFFFF',
           _dark: 'hsla(0, 0%, 5%, 1)'

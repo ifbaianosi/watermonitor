@@ -86,8 +86,6 @@ export function makeServer() {
 
               schema.db.tanks.update(tankId, {...tank})
 
-              console.log({tankId, newDailyControl})
-
               return schema.db.dailyControls.insert(newDailyControl)
             });
 

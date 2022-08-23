@@ -32,11 +32,11 @@ export function WaterLevelButton(props: any) {
 
         >
           <Heading 
-            color={ isChecked ? selectedColor : 'rgba(69, 84, 71, 0.5)'}
+            color={ isChecked ? selectedColor : 'waterLevelText'}
             textTransform={'uppercase'}
-            fontSize={'1rem'}
-            fontWeight='bold'
-          
+            fontSize={'1rem'}            
+            fontWeight={isChecked ? 'bold' : 'normal'}
+            
             _hover={{
               color: isChecked ? selectedColor : selectedBgColor
             }}
