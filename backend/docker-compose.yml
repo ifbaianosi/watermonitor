@@ -1,0 +1,27 @@
+version: "3.9"
+
+networks:
+  watermonitor-network:
+    driver: bridge
+    
+services:
+  watermonitor-mysql:
+    image: mysql:8.0
+    environment:   
+      MYSQL_ROOT_PASSWORD: ""
+    ports:
+      - "3306:3306"
+    networks:
+      - watermonitor-network
+      
+  watermonitor-api:
+    image: watermonitor-api
+    command: ["/wait-for-it.sh", "watermonitor-mysql:3306", "-t", "180", "--", "java", "-jar", "api.jar"]
+    environment:
+      DB_HOST: watermonitor-mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - watermonitor-network
+    depends_on:
+      - watermonitor-mysql

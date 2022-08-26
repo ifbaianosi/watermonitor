@@ -84,3 +84,14 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Populate Tank Table
+-- -----------------------------------------------------
+
+INSERT INTO tank (name) VALUES("Portaria");
+INSERT INTO tank (name) VALUES("Aviário");
+INSERT INTO tank (name) VALUES("Sabotagem");
+INSERT INTO tank (name) VALUES("Tanque Azul - Horta");
+INSERT INTO tank (name) VALUES("Tanque Azul - Residência");
+INSERT INTO tank (name) VALUES("Tanque Azul - Suíno");
