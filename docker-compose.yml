@@ -25,17 +25,16 @@ services:
       - watermonitor-network
     depends_on:
       - watermonitor-mysql
-
-  services: 
-    client-web:
-      container_name: watermonitor-web
-      build:
-        dockerfile: Dockerfile
-        context: ./web
-      volumes:
-        - '.:/app'
-        - '/app/node_modules'
-      ports:
-        - '3000:80'
-      networks:
-        - watermonitor-network
+    
+  client-web:
+    container_name: watermonitor-web
+    build:
+      dockerfile: Dockerfile
+      context: ./web
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '3000:80'
+    networks:
+      - watermonitor-network
