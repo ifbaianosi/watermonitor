@@ -1,0 +1,13 @@
+version: '3.9'
+
+services: 
+  client-web:
+    container_name: watermonitor-web
+    build:
+      dockerfile: Dockerfile
+      context: ./web
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '3000:80'
