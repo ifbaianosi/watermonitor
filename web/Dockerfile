@@ -17,5 +17,5 @@ FROM nginx:1.23.1-alpine
 
 COPY --from=watermonitor-web /app/dist/ /usr/share/nginx/html
 
-# Copy the default nginx.conf provided by tiangolo/node-frontend
+# Copy the default nginx.conf
 # COPY --from=watermonitor-web /nginx.conf /etc/nginx/conf.d/default.conf
