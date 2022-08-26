@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY package*.json /app/
 COPY yarn.lock /app/
+COPY nginx.conf /app/
 
 RUN yarn
 
