@@ -8,9 +8,24 @@ interface ConsumerDisplayProps {
 
 export function ConsumerDisplay({ reading, readOnly = true, onChangeReading }: ConsumerDisplayProps) {
 
+    function configDisplayValueReading(reading: string) {
+        const amountFromZeroToTheLeft = 7 - reading.length
+        
+        let readingWithZeroLeft = ''
+
+        for (let index = 0; index < amountFromZeroToTheLeft; index++) {
+            readingWithZeroLeft += '0'
+        }
+
+        return readingWithZeroLeft + reading
+    }
+
+    const readingWithZeroLeft = configDisplayValueReading(reading)
+
+    const valueReading = reading.length === 7 ? reading : readingWithZeroLeft
+
     function onChange(value: string) {
         if (onChangeReading) {
-            console.log(value)
             onChangeReading(value)
         }
     }
@@ -19,7 +34,7 @@ export function ConsumerDisplay({ reading, readOnly = true, onChangeReading }: C
         <Stack>
             {/* <Text>Consumo</Text> */}
             <HStack spacing='3'>
-                <PinInput value={reading} onChange={onChange} >
+                <PinInput value={valueReading} onChange={onChange} >
                     <PinInputField _readOnly={{bg: 'background', cursor: 'not-allowed', textColor: 'text', opacity: '0.7'}} readOnly={readOnly} h='80px' w='70px' bg='background' color={'title'} borderWidth={'1px'} borderColor='cardBorderColor' fontSize={'36px'} fontWeight='semibold' />
                     <PinInputField _readOnly={{bg: 'background', cursor: 'not-allowed', textColor: 'text', opacity: '0.7'}} readOnly={readOnly} h='80px' w='70px' bg='background' color={'title'} borderWidth={'1px'} borderColor='cardBorderColor' fontSize={'36px'} fontWeight='semibold' />
                     <PinInputField _readOnly={{bg: 'background', cursor: 'not-allowed', textColor: 'text', opacity: '0.7'}} readOnly={readOnly} h='80px' w='70px' bg='background' color={'title'} borderWidth={'1px'} borderColor='cardBorderColor' fontSize={'36px'} fontWeight='semibold' />
