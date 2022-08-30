@@ -16,7 +16,7 @@
     <br />
     <br />
     <br />
-    <img alt="watermonitor" title="watermonitor" src="https://github.com/ifbaianosi/assets/blob/main/watermonitor/watermonitor-cover-notion.png" />
+    <img alt="watermonitor" title="watermonitor" src="https://github.com/ifbaianosi/assets/blob/main/watermonitor/watermonitor-cover.png" />
 </h1>
 
 
@@ -31,8 +31,8 @@
 👉<a href="#-funcionalidades" style="text-decoration: none; "> Funcionalidades</a> <br/>
 <!-- 👉<a href="#-melhorias" style="text-decoration: none; "> Melhorias</a> <br/> -->
 👉<a href="#-layout" style="text-decoration: none"> Layout</a> <br/>
-<!-- 👉<a href="#-demonstracao" style="text-decoration: none"> Demonstração</a> <br/> -->
-<!-- 👉<a href="#-como-executar-o-projeto" style="text-decoration: none"> Como executar</a> <br/> -->
+👉<a href="#-demonstracao" style="text-decoration: none"> Demonstração</a> <br/>
+👉<a href="#-como-executar-o-projeto" style="text-decoration: none"> Como executar</a> <br/>
 👉<a href="#-tecnologias" style="text-decoration: none"> Tecnologias</a> <br/>
 👉<a href="#-autor" style="text-decoration: none"> Autor</a> <br/>
 👉<a href="#-user-content--licença" style="text-decoration: none"> Licença</a>
@@ -59,8 +59,8 @@ Quando em operação o Watermonitor pretende tornar público e acessível as inf
 
 ## ⚙️ Funcionalidades
 
-- ### Leitura diária do hidrômetro
-- ### Controle diário do nível da água
+- #### Leitura diária do hidrômetro
+- #### Controle diário do nível da água
 
 <!-- ---
 <a name="-melhorias"></a>
@@ -79,24 +79,23 @@ Layout do projeto desenvolvido com a ferramenta **[Figma](https://www.figma.comy
 ### Página de controle diário do nível de água dos reservatórios
 <img src="https://github.com/ifbaianosi/assets/blob/main/watermonitor/water-monitor-nova-leitura.jpg" width="800px" />
 
-#### Página de leitura diária do hidrêmetro
+#### Página de leitura diária do hidrômetro
 <img src="https://github.com/ifbaianosi/assets/blob/main/watermonitor/leitura-diaria-hidrometro.jpg" width="800px"/>
 
-<!-- ---
+
 
 <a name="-demonstracao"></a>
 
 ## 🕹️ Demonstração
 
-<a align="center" href="https://www.linkedin.com/posts/glaubermatos_desenvolvimentoweb-springboot-nextjs-activity-6905992105182015488-CfRu">
-    <img alt="happy-web" src="https://img.shields.io/static/v1?label=post&message=jobscalc&color=F1972C&style=flat&logo=linkedin">
-</a> -->
+[<img src="https://i.ytimg.com/vi/YkBOjtKU6DI/maxresdefault.jpg" >](https://youtu.be/YkBOjtKU6DI "Demonstração watermonitor")
 
-<!-- ---
+
 
 ## 🚀 Como executar o projeto
+Em breve ...
 
-💡O Frontend precisa que o Backend esteja sendo executado para funcionar, que pode ser encontrado **[AQUI](https://github.com/glaubermatos/jobscalc-api)**.
+<!-- ---💡O Frontend precisa que o Backend esteja sendo executado para funcionar, que pode ser encontrado **[AQUI](https://github.com/glaubermatos/jobscalc-api)**.
 
 💡Para integração com a autenticação é preciso configurar as variáveis de ambiente para o Next-Auth se conectar com a api do Github. 
 
@@ -147,8 +146,10 @@ Para ver detalhes da implementação do Next-Auth **[AQUI](https://next-auth.js.
 
 Saiba mais sobre o [Next-Auth](https://nextjs.org/). -->
 
+<br />
 
 ---
+
 
 ## 🛠 Tecnologias
 
